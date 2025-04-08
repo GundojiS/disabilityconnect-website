@@ -6,7 +6,7 @@
           <h5>About Us</h5>
           <ul class="nav flex-column">
             <li class="nav-item mb-2">
-              <router-link to="/about" class="nav-link p-0 text-body-secondary"
+              <router-link to="/about-us/our-mission" class="nav-link p-0 text-body-secondary"
                 >Our Mission</router-link
               >
             </li>

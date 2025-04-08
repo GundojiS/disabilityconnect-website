@@ -9,7 +9,7 @@ const routes = [
     component: HomeView,
   },
   {
-    path: '/our-mission',
+    path: '/about-us/our-mission',
     name: 'Our Mission',
     component: OurMissionView,
   },

@@ -10,13 +10,18 @@
         <!-- <svg class="bi me-2" width="40" height="32" aria-hidden="true">
           <use xlink:href="#bootstrap"></use>
         </svg> -->
-        <span class="fs-4">Disability Connect Australia </span>
+        <span class="fs-4 logo-text">Disability Connect Australia </span>
       </a>
 
       <ul class="nav nav-pills gap-2 ms-4">
-        <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
         <li class="nav-item">
-          <router-link to="/" class="nav-link text-wrap text-center" style="max-width: 150px"
+          <router-link to="/" class="nav-link" aria-current="page">Home</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link
+            to="/resources-and-information"
+            class="nav-link text-wrap text-center"
+            style="max-width: 150px"
             >Resources and Information</router-link
           >
         </li>
@@ -104,6 +109,12 @@ header {
   position: relative;
   top: 0;
   width: 100%;
+}
+
+/* Customize the active link's style */
+.router-link-active {
+  background-color: #0d6efd; /* Blue background for active link */
+  color: white; /* White text for active link */
 }
 
 /* .b-example-divider {
