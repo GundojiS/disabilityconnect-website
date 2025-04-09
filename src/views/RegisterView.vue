@@ -58,7 +58,7 @@
                 {{ errors.confirmPassword }}
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 mt-2">
               <div class="form-check">
                 <input
                   type="checkbox"
@@ -66,7 +66,7 @@
                   id="isAdmin"
                   v-model="formData.isAdmin"
                 />
-                <label class="form-check-label" for="isAdmin">Admin?</label>
+                <label class="form-check-label" for="isAdmin">Register as an Admin?</label>
               </div>
             </div>
           </div>

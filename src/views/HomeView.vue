@@ -20,7 +20,11 @@
               <a href="#!" class="btn btn-primary w-100">Learn More</a>
             </div>
             <div class="col-6 mb-3">
-              <a href="#!" class="btn btn-secondary w-100">Latest News</a>
+              <router-link
+                to="/community-hub/virtual-events/the-future-of-assistive-technology"
+                class="btn btn-secondary w-100"
+                >Latest News</router-link
+              >
             </div>
           </div>
         </div>

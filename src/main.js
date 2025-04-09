@@ -19,10 +19,13 @@
 
 // createApp(App).mount('#app')
 
+// main.js
+
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import PrimeVue from 'primevue/config'
 import Aura from '@primevue/themes/aura'
+import Rating from 'primevue/rating'
 
 import { createApp } from 'vue'
 import App from './App.vue'
@@ -42,3 +45,5 @@ app.use(PrimeVue, {
     preset: Aura,
   },
 })
+
+app.use(Rating, {})

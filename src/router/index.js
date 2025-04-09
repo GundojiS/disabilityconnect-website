@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import OurMissionView from '../views/OurMissionView.vue'
 import RegisterView from '@/views/RegisterView.vue'
+import LoginView from '@/views/LoginView.vue'
+import WebinarView from '@/views/WebinarView.vue'
 
 const routes = [
   {
@@ -18,6 +20,16 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: RegisterView,
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: LoginView,
+  },
+  {
+    path: '/community-hub/virtual-events/the-future-of-assistive-technology',
+    name: 'Webinar',
+    component: WebinarView,
   },
 ]
 
