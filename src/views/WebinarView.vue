@@ -26,6 +26,9 @@
               <li>Future trends in the field of assistive technology</li>
               <li>Q&A session with industry experts</li>
             </ul>
+            <div class="mt-4">
+              <AppRating v-model="value" />
+            </div>
           </div>
         </div>
       </div>

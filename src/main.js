@@ -25,7 +25,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import PrimeVue from 'primevue/config'
 import Aura from '@primevue/themes/aura'
-import Rating from 'primevue/rating'
 
 import { createApp } from 'vue'
 import App from './App.vue'
@@ -46,4 +45,7 @@ app.use(PrimeVue, {
   },
 })
 
-app.use(Rating, {})
+import Button from 'primevue/button'
+import Rating from 'primevue/rating'
+app.component('AppButton', Button)
+app.component('AppRating', Rating)

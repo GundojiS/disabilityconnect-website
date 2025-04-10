@@ -21,7 +21,7 @@
             <div class="col-md-6">
               <label for="email" class="form-label">Email</label>
               <input
-                type="text"
+                type="email"
                 class="form-control"
                 id="email"
                 v-model="formData.email"
