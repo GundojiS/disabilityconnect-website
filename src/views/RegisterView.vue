@@ -5,7 +5,7 @@
         <h1 class="text-center mb-5">Register</h1>
         <form @submit.prevent="submitForm">
           <div class="row mb-3">
-            <div class="col-md-6">
+            <!-- <div class="col-md-6">
               <label for="username" class="form-label">Username</label>
               <input
                 type="text"
@@ -16,7 +16,7 @@
                 @input="() => validateName(false)"
               />
               <div v-if="errors.username" class="text-danger">{{ errors.username }}</div>
-            </div>
+            </div> -->
 
             <div class="col-md-6">
               <label for="email" class="form-label">Email</label>
@@ -97,9 +97,9 @@
 </div> -->
   <hr />
   <DataTable :value="submittedCards" tableStyle="min-width: 30rem">
-    <Column field="username" header="Username"></Column>
-    <Column field="password" header="Password"></Column>
+    <!-- <Column field="username" header="Username"></Column> -->
     <Column field="email" header="Email"></Column>
+    <Column field="password" header="Password"></Column>
     <Column field="isAdmin" header="Is Admin?"></Column>
   </DataTable>
 </template>
@@ -114,18 +114,25 @@ const formData = ref({
   password: '',
   confirmPassword: '',
   email: '',
-  isAdmin: '',
+  isAdmin: 'false',
 })
 
 const submittedCards = ref([])
 
 const submitForm = () => {
-  validateName(true)
+  // validateName(true)
   validatePassword(true)
   validateEmail(true)
-  validateUser(true)
+  // validateUser(true)
 
-  if (!errors.value.username && !errors.value.password && !errors.value.email) {
+  // if (!errors.value.username && !errors.value.password && !errors.value.email) {
+  //   submittedCards.value.push({
+  //     ...formData.value,
+  //   })
+  //   clearForm()
+  // }
+
+  if (!errors.value.password && !errors.value.email) {
     submittedCards.value.push({
       ...formData.value,
     })
@@ -135,15 +142,20 @@ const submitForm = () => {
 
 const clearForm = () => {
   formData.value = {
-    username: '',
     password: '',
     email: '',
     isAdmin: false,
   }
 }
 
+// const errors = ref({
+//   username: null,
+//   password: null,
+//   confirmPassword: null,
+//   email: null,
+// })
+
 const errors = ref({
-  username: null,
   password: null,
   confirmPassword: null,
   email: null,
@@ -161,26 +173,26 @@ const validateConfirmPassword = (blur) => {
   }
 }
 
-const validateName = (blur) => {
-  if (formData.value.username.length < 3) {
-    if (blur) errors.value.username = 'Name must be at least 3 characters'
-  } else {
-    errors.value.username = null
-  }
-}
+// const validateName = (blur) => {
+//   if (formData.value.username.length < 3) {
+//     if (blur) errors.value.username = 'Name must be at least 3 characters'
+//   } else {
+//     errors.value.username = null
+//   }
+// }
 
-const validateUser = (blur) => {
-  if (submittedCards.value.length === 0) {
-    errors.value.username = null
-    return
-  }
-  const userExists = submittedCards.value.some((e) => e.username === formData.value.username)
-  if (userExists) {
-    if (blur) errors.value.username = 'User already exists, please choose a different username.'
-  } else {
-    errors.value.username = null
-  }
-}
+// const validateUser = (blur) => {
+//   if (submittedCards.value.length === 0) {
+//     errors.value.username = null
+//     return
+//   }
+//   const userExists = submittedCards.value.some((e) => e.username === formData.value.username)
+//   if (userExists) {
+//     if (blur) errors.value.username = 'User already exists, please choose a different username.'
+//   } else {
+//     errors.value.username = null
+//   }
+// }
 
 const validateEmail = (blur) => {
   const email = formData.value.email
