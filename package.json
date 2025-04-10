@@ -1,5 +1,5 @@
 {
-  "name": "disabilityconnect-website",
+  "name": "sgundoji-library",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -7,37 +7,35 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint:oxlint": "oxlint . --fix -D correctness --ignore-path .gitignore",
-    "lint:eslint": "eslint . --fix",
-    "lint": "run-s lint:*",
-    "format": "prettier --write src/"
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "format": "prettier --write src/",
+    "start": "node server.js"
   },
   "dependencies": {
-    "@primevue/themes": "^4.3.3",
+    "@primevue/themes": "^4.0.4",
     "axios": "^1.8.4",
-    "bootstrap": "^5.3.5",
+    "bootstrap": "^5.3.3",
     "cors": "^2.8.5",
-    "express": "^5.1.0",
+    "express": "^4.21.2",
     "firebase": "^11.6.0",
     "firebase-admin": "^13.2.0",
     "firebase-functions": "^6.3.2",
-    "primeicons": "^7.0.0",
-    "primevue": "^4.3.3",
-    "vue": "^3.5.13",
-    "vue-router": "^4.5.0"
+    "primevue": "^4.0.4",
+    "vue": "^3.4.29",
+    "vue-router": "^4.4.3"
   },
   "devDependencies": {
-    "@eslint/js": "^9.22.0",
-    "@vitejs/plugin-vue": "^5.2.3",
-    "@vue/eslint-config-prettier": "^10.2.0",
-    "eslint": "^9.22.0",
-    "eslint-plugin-oxlint": "^0.16.0",
-    "eslint-plugin-vue": "~10.0.0",
+    "@eslint/js": "^9.24.0",
+    "@rushstack/eslint-patch": "^1.8.0",
+    "@vitejs/plugin-vue": "^5.0.5",
+    "@vue/eslint-config-prettier": "^9.0.0",
+    "eslint": "^8.57.1",
+    "eslint-config-eslint": "^11.0.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-vue": "^9.33.0",
     "globals": "^16.0.0",
-    "npm-run-all2": "^7.0.2",
-    "oxlint": "^0.16.0",
-    "prettier": "3.5.3",
-    "vite": "^6.2.4",
-    "vite-plugin-vue-devtools": "^7.7.2"
+    "prettier": "^3.2.5",
+    "vite": "^6.2.6",
+    "vite-plugin-vue-devtools": "^7.3.1"
   }
 }

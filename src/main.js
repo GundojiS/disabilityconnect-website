@@ -32,6 +32,7 @@ import router from './router'
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app'
+import { getFunctions, httpsCallable } from 'firebase/functions'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -47,6 +48,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 initializeApp(firebaseConfig)
+// const functions = getFunctions(app)
 
 // import PrimeVue from 'primevue/config'
 // import Aura from '@primevue/themes/aura'
@@ -67,6 +69,15 @@ import Button from 'primevue/button'
 import Rating from 'primevue/rating'
 app.component('AppButton', Button)
 app.component('AppRating', Rating)
+
+const addAdmin = httpsCallable(functions, 'addAdminRole')
+addAdmin({ email: 'user@example.com' })
+  .then((result) => {
+    console.log(result.data.message) // Success!
+  })
+  .catch((error) => {
+    console.error('Error adding admin: ', error)
+  })
 
 // import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
