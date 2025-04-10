@@ -40,14 +40,55 @@
             >Accessibility Services</a
           >
         </li>
-        <li class="nav-item">
+
+        <!-- <li class="nav-item">
           <router-link to="/register" class="nav-link">Register</router-link>
         </li>
-        <li class="nav-item"><router-link to="/login" class="nav-link">Login</router-link></li>
+        <li class="nav-item"><router-link to="/login" class="nav-link">Login</router-link></li> -->
+
+        <!-- Conditionally render Register and Login links when not logged in -->
+        <template v-if="!isLoggedIn">
+          <li class="nav-item">
+            <router-link to="/register" class="nav-link">Register</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/login" class="nav-link">Login</router-link>
+          </li>
+        </template>
+
+        <li class="nav-item" v-if="isLoggedIn">
+          <a href="#" class="nav-link" @click.prevent="handleSignOut">Sign Out</a>
+        </li>
       </ul>
     </header>
   </div>
 </template>
+
+<script setup>
+import { ref, onMounted } from 'vue'
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
+import { useRouter } from 'vue-router'
+
+const isLoggedIn = ref(false)
+const router = useRouter()
+const auth = getAuth()
+
+onMounted(() => {
+  onAuthStateChanged(auth, (user) => {
+    isLoggedIn.value = !!user
+  })
+})
+
+const handleSignOut = async () => {
+  try {
+    await signOut(auth)
+    isLoggedIn.value = false
+    router.push('/')
+  } catch (error) {
+    console.error('Sign-out error:', error)
+  }
+}
+</script>
 
 <!-- <script setup>
 // import { ref, onMounted } from 'vue';
@@ -95,6 +136,60 @@
 //   }
 // }
 //
+</script> -->
+
+<!-- <script setup>
+import { onMounted, ref } from 'vue'
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
+import { useRouter } from 'vue-router'
+
+const isLoggedIn = ref(false)
+const router = useRouter()
+
+let auth
+onMounted(() => {
+  auth = getAuth()
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      isLoggedIn.value = true
+    } else {
+      isLoggedIn.value = false
+    }
+  })
+})
+
+const handleSignOut = () => {
+  signOut(auth).then(() => {
+    router.push('/')
+  })
+}
+</script> -->
+
+<!-- <script setup>
+import { ref, onMounted } from 'vue'
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
+import { useRouter } from 'vue-router'
+
+const isLoggedIn = ref(false)
+const router = useRouter()
+const auth = getAuth()
+
+onMounted(() => {
+  onAuthStateChanged(auth, (user) => {
+    isLoggedIn.value = !!user // This will be true if user exists
+    console.log('Auth state changed. User:', user)
+  })
+})
+
+const handleSignOut = async () => {
+  try {
+    await signOut(auth)
+    isLoggedIn.value = false
+    router.push('/')
+  } catch (error) {
+    console.error('Sign-out error:', error)
+  }
+}
 </script> -->
 
 <style scoped>

@@ -37,7 +37,9 @@
 </template>
 
 <script setup>
-// No script needed for now
+import { ref } from 'vue'
+
+const value = ref(0) // or whatever default rating you want
 </script>
 
 <style></style>

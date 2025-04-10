@@ -4,6 +4,8 @@ import OurMissionView from '../views/OurMissionView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import LoginView from '@/views/LoginView.vue'
 import WebinarView from '@/views/WebinarView.vue'
+import ResourcesAndInformationView from '@/views/ResourcesAndInformationView.vue'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
 const routes = [
   {
@@ -31,7 +33,36 @@ const routes = [
     name: 'Webinar',
     component: WebinarView,
   },
+  {
+    path: '/resources-and-information',
+    name: 'ResourcesAndInformation',
+    component: ResourcesAndInformationView,
+  },
 ]
+
+// const getCurrentUser = () => {
+//   return new Promise((resolve, reject) => {
+//     const removeListener = onAuthStateChanged(
+//       getAuth(),
+//       (user) => {
+//         removeListener()
+//         resolve(user)
+//       },
+//       reject,
+//     )
+//   })
+// }
+
+// router.beforeEach(async (to, from, next) => {
+//   if (to.matched.some((record) => record.meta.requiresAuth)) {
+//     if (await getCurrentUser()) {
+//       next()
+//     } else {
+//       alert('You need to be logged in to access this page.')
+//       next('/')
+//     }
+//   }
+// })
 
 const router = createRouter({
   history: createWebHistory(),

@@ -127,6 +127,8 @@ const register = () => {
       // Signed in
       const user = userCredential.user
       console.log('User registered:', user)
+      console.log(auth.currentUser)
+      // You can change the next route from login to something more useful
       router.push('/login')
     })
     .catch((error) => {

@@ -1,20 +1,23 @@
 <template>
   <div class="login d-flex justify-content-center mt-5">
-    <form @submit.prevent="submitForm" style="max-width: 400px; width: 100%">
+    <!-- <form @submit.prevent="submitForm" style="max-width: 400px; width: 100%"> -->
+    <form @submit.prevent="login" style="max-width: 400px; width: 100%">
       <div class="text-center mb-4">
         <h1>Log in</h1>
       </div>
 
       <div class="mb-3">
-        <label for="username" class="form-label">Username</label>
-        <input type="text" class="form-control" id="username" v-model="formData.username" />
+        <label for="email" class="form-label">Email</label>
+        <input type="text" class="form-control" id="email" v-model="formData.email" />
       </div>
 
       <div class="mb-3">
         <label for="password" class="form-label">Password</label>
         <input type="password" class="form-control" id="password" v-model="formData.password" />
-        <div v-if="errors.password" class="text-danger">{{ errors.password }}</div>
+        <!-- <div v-if="errors.password" class="text-danger">{{ errors.password }}</div> -->
       </div>
+
+      <div v-if="errorMessages" class="text-danger mb-3">{{ errorMessages }}</div>
 
       <div class="text-center">
         <button type="submit" class="btn btn-primary">Log In</button>
@@ -27,43 +30,78 @@
 // Our logic will go here
 import { ref } from 'vue'
 import router from '@/router'
-import { authState } from './authenticationState'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+// import { authState } from './authenticationState'
 
 const formData = ref({
-  username: '',
+  email: '',
   password: '',
 })
 
-const submitForm = () => {
-  if (validateCredentials()) {
-    authState.login()
-    router.push('/')
-    clearForm()
-  }
+const errorMessages = ref('')
+
+const login = () => {
+  const auth = getAuth()
+  signInWithEmailAndPassword(auth, formData.value.email, formData.value.password)
+    .then((userCredential) => {
+      // Signed in
+      const user = userCredential.user
+      console.log('User logged in:', user)
+      router.push('/')
+    })
+    .catch((error) => {
+      console.log(error.code)
+      switch (error.code) {
+        case 'auth/invalid-email':
+          errorMessages.value = 'Invalid email'
+          break
+        case 'auth/user-not-found':
+          errorMessages.value = 'User not found'
+          break
+        case 'auth/wrong-password':
+          errorMessages.value = 'Wrong password'
+          break
+        default:
+          errorMessages.value = 'Email or passowrd was incorrect'
+          break
+      }
+      // const errorCode = error.code
+      // const errorMessage = error.message
+      // console.error('Error logging in:', errorCode, errorMessage)
+      // errors.value.password = 'Incorrect email or password.'
+    })
 }
 
-const clearForm = () => {
-  formData.value = {
-    username: '',
-    password: '',
-  }
-}
+// const submitForm = () => {
+//   if (validateCredentials()) {
+//     authState.login()
+//     router.push('/')
+//     clearForm()
+//   }
+// }
 
-const errors = ref({
-  username: null,
-  password: null,
-})
+// const clearForm = () => {
+//   formData.value = {
+//     username: '',
+//     password: '',
+//   }
+// }
 
-const validateCredentials = () => {
-  const password = formData.value.password
-  const username = formData.value.username
-  if (username == '12345678' && password == '12345678') {
-    return true
-  } else {
-    errors.value.password = `Incorrect email or password.`
-    return false
-  }
-}
+// const errors = ref({
+//   username: null,
+//   password: null,
+// })
+
+// const validateCredentials = () => {
+//   const password = formData.value.password
+//   const username = formData.value.username
+//   if (username == '12345678' && password == '12345678') {
+//     return true
+//   } else {
+//     errors.value.password = `Incorrect email or password.`
+//     return false
+//   }
+// }
 </script>
 
 <style scoped>
