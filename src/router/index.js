@@ -5,6 +5,7 @@ import RegisterView from '@/views/RegisterView.vue'
 import LoginView from '@/views/LoginView.vue'
 import WebinarView from '@/views/WebinarView.vue'
 import ResourcesAndInformationView from '@/views/ResourcesAndInformationView.vue'
+import MyAccountView from '@/views/MyAccountView.vue'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
 const routes = [
@@ -37,6 +38,12 @@ const routes = [
     path: '/resources-and-information',
     name: 'ResourcesAndInformation',
     component: ResourcesAndInformationView,
+  },
+  {
+    path: '/my-account',
+    name: 'MyAccount',
+    component: MyAccountView,
+    meta: { requiresAuth: true },
   },
 ]
 

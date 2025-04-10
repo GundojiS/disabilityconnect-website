@@ -27,7 +27,7 @@
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link text-wrap text-center" style="max-width: 120px"
-            >Community Hub</a
+            >Community Hub Secret</a
           >
         </li>
         <li class="nav-item">
@@ -55,7 +55,9 @@
             <router-link to="/login" class="nav-link">Login</router-link>
           </li>
         </template>
-
+        <li class="nav-item" v-if="isLoggedIn">
+          <router-link to="/my-account" class="nav-link">My Account</router-link>
+        </li>
         <li class="nav-item" v-if="isLoggedIn">
           <a href="#" class="nav-link" @click.prevent="handleSignOut">Sign Out</a>
         </li>
