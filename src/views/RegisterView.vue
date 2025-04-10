@@ -71,7 +71,7 @@
             </div>
           </div>
           <div class="text-center">
-            <button type="submit" class="btn btn-primary me-2">Submit</button>
+            <button type="submit" class="btn btn-primary me-2" @click="register">Submit</button>
             <button type="button" class="btn btn-secondary" @click="clearForm">Clear</button>
           </div>
         </form>
@@ -107,6 +107,8 @@
 <script setup>
 // Our logic will go here
 import { ref } from 'vue'
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
+import { useRouter } from 'vue-router'
 import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
 const formData = ref({
@@ -116,6 +118,23 @@ const formData = ref({
   email: '',
   isAdmin: 'false',
 })
+
+const router = useRouter()
+const auth = getAuth()
+const register = () => {
+  createUserWithEmailAndPassword(auth, formData.value.email, formData.value.password)
+    .then((userCredential) => {
+      // Signed in
+      const user = userCredential.user
+      console.log('User registered:', user)
+      router.push('/login')
+    })
+    .catch((error) => {
+      const errorCode = error.code
+      const errorMessage = error.message
+      console.error('Error registering user:', errorCode, errorMessage)
+    })
+}
 
 const submittedCards = ref([])
 
