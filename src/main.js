@@ -1,26 +1,3 @@
-// //import './assets/main.css'
-
-// import { createApp } from 'vue'
-// import App from './App.vue'
-
-// //import style css
-// //import './style.css'
-
-// //import bootstrap css
-// import 'bootstrap/dist/css/bootstrap.min.css'
-// import 'bootstrap/dist/js/bootstrap.bundle.min.js'
-
-// //import router from './router'
-
-// // const app = createApp(App)
-
-// // app.use(router)
-// // app.mount('#app')
-
-// createApp(App).mount('#app')
-
-// main.js
-
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import PrimeVue from 'primevue/config'
@@ -33,8 +10,6 @@ import router from './router'
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app'
 import { getFunctions, httpsCallable } from 'firebase/functions'
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -47,46 +22,129 @@ const firebaseConfig = {
 }
 
 // Initialize Firebase
-initializeApp(firebaseConfig)
-// const functions = getFunctions(app)
+const firebaseApp = initializeApp(firebaseConfig)
 
-// import PrimeVue from 'primevue/config'
-// import Aura from '@primevue/themes/aura'
+// Initialize Functions
+const functions = getFunctions(firebaseApp)
 
 const app = createApp(App)
-// app.use(PrimeVue, { theme: { preset: Aura } })
-app.use(router)
 
-app.mount('#app')
-
+// Use PrimeVue and Router
 app.use(PrimeVue, {
   theme: {
     preset: Aura,
   },
 })
+app.use(router)
 
+// Register PrimeVue components
 import Button from 'primevue/button'
 import Rating from 'primevue/rating'
 app.component('AppButton', Button)
 app.component('AppRating', Rating)
 
-const addAdmin = httpsCallable(functions, 'addAdminRole')
-addAdmin({ email: 'user@example.com' })
-  .then((result) => {
-    console.log(result.data.message) // Success!
-  })
-  .catch((error) => {
-    console.error('Error adding admin: ', error)
-  })
+// // Call Firebase Function
+// const addAdmin = httpsCallable(functions, 'addAdminRole')
+// addAdmin({ email: 'user@example.com' })
+//   .then((result) => {
+//     console.log(result.data.message) // Success!
+//   })
+//   .catch((error) => {
+//     console.error('Error adding admin: ', error)
+//   })
 
-// import { getAuth, onAuthStateChanged } from 'firebase/auth'
+// Mount the app
+app.mount('#app')
 
-// const auth = getAuth()
+// // //import './assets/main.css'
 
-// onAuthStateChanged(auth, () => {
-//   if (!app) {
-//     app = createApp(App)
-//     app.use(router)
-//     app.mount('#app')
-//   }
+// // import { createApp } from 'vue'
+// // import App from './App.vue'
+
+// // //import style css
+// // //import './style.css'
+
+// // //import bootstrap css
+// // import 'bootstrap/dist/css/bootstrap.min.css'
+// // import 'bootstrap/dist/js/bootstrap.bundle.min.js'
+
+// // //import router from './router'
+
+// // // const app = createApp(App)
+
+// // // app.use(router)
+// // // app.mount('#app')
+
+// // createApp(App).mount('#app')
+
+// // main.js
+
+// import 'bootstrap/dist/css/bootstrap.min.css'
+// import 'bootstrap/dist/js/bootstrap.bundle.min.js'
+// import PrimeVue from 'primevue/config'
+// import Aura from '@primevue/themes/aura'
+
+// import { createApp } from 'vue'
+// import App from './App.vue'
+// import router from './router'
+
+// // Import the functions you need from the SDKs you need
+// import { initializeApp } from 'firebase/app'
+// import { getFunctions, httpsCallable } from 'firebase/functions'
+// // TODO: Add SDKs for Firebase products that you want to use
+// // https://firebase.google.com/docs/web/setup#available-libraries
+
+// // Your web app's Firebase configuration
+// const firebaseConfig = {
+//   apiKey: 'AIzaSyCRfSzTQNJIJzzTh0d_6ohOglfX4gkCArI',
+//   authDomain: 'disability-connect-australia.firebaseapp.com',
+//   projectId: 'disability-connect-australia',
+//   storageBucket: 'disability-connect-australia.firebasestorage.app',
+//   messagingSenderId: '1090916556007',
+//   appId: '1:1090916556007:web:33080dd499509c133d9642',
+// }
+
+// // Initialize Firebase
+// initializeApp(firebaseConfig)
+// const functions = getFunctions(app)
+
+// // import PrimeVue from 'primevue/config'
+// // import Aura from '@primevue/themes/aura'
+
+// const app = createApp(App)
+// // app.use(PrimeVue, { theme: { preset: Aura } })
+// app.use(router)
+
+// app.mount('#app')
+
+// app.use(PrimeVue, {
+//   theme: {
+//     preset: Aura,
+//   },
 // })
+
+// import Button from 'primevue/button'
+// import Rating from 'primevue/rating'
+// app.component('AppButton', Button)
+// app.component('AppRating', Rating)
+
+// const addAdmin = httpsCallable(functions, 'addAdminRole')
+// addAdmin({ email: 'user@example.com' })
+//   .then((result) => {
+//     console.log(result.data.message) // Success!
+//   })
+//   .catch((error) => {
+//     console.error('Error adding admin: ', error)
+//   })
+
+// // import { getAuth, onAuthStateChanged } from 'firebase/auth'
+
+// // const auth = getAuth()
+
+// // onAuthStateChanged(auth, () => {
+// //   if (!app) {
+// //     app = createApp(App)
+// //     app.use(router)
+// //     app.mount('#app')
+// //   }
+// // })
