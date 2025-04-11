@@ -58,7 +58,7 @@
                 {{ errors.confirmPassword }}
               </div>
             </div>
-            <div class="col-md-6 mt-2">
+            <!-- <div class="col-md-6 mt-2">
               <div class="form-check">
                 <input
                   type="checkbox"
@@ -68,7 +68,7 @@
                 />
                 <label class="form-check-label" for="isAdmin">Register as an Admin?</label>
               </div>
-            </div>
+            </div> -->
           </div>
           <div class="text-center">
             <button type="submit" class="btn btn-primary me-2" @click="register">Submit</button>
@@ -95,13 +95,12 @@
       </div>
    </div>
 </div> -->
-  <hr />
-  <DataTable :value="submittedCards" tableStyle="min-width: 30rem">
-    <!-- <Column field="username" header="Username"></Column> -->
+
+  <!-- <DataTable :value="submittedCards" tableStyle="min-width: 30rem">
     <Column field="email" header="Email"></Column>
     <Column field="password" header="Password"></Column>
     <Column field="isAdmin" header="Is Admin?"></Column>
-  </DataTable>
+  </DataTable> -->
 </template>
 
 <script setup>

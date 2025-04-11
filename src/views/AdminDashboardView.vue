@@ -187,6 +187,7 @@ button:disabled {
 <template>
   <div class="flex justify-center mt-10">
     <div class="w-full max-w-6xl">
+      <h2 class="text-2xl font-semibold mb-4 text-center">User Database</h2>
       <div class="overflow-x-auto">
         <table
           class="mx-auto table-auto border-collapse border border-gray-300 w-full text-left text-sm"

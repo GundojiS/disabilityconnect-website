@@ -15,10 +15,11 @@
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
               incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
             </p>
-            <p class="lead mb-0">
+            <p class="lead mb-5">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
               incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
             </p>
+            <a href="#!" class="btn btn-primary w-100">asdfjkl;</a>
           </div>
         </div>
       </div>
