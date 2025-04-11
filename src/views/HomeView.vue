@@ -47,14 +47,14 @@
               data-orientation="portrait"
               data-color="black"
             >
-              <div class="screen bg-black">
+              <div class="screen">
                 <!-- PUT CONTENTS HERE:-->
                 <!-- * * This can be a video, image, or just about anything else.-->
                 <!-- * * Set the max width of your media to 100% and the height to-->
                 <!-- * * 100% like the demo example below.-->
                 <!-- <video muted="muted" autoplay="" loop="" style="max-width: 100%; height: 100%"><source src="assets/img/demo-screen.mp4" type="video/mp4"></video> -->
                 <img
-                  src="@/assets/homepagecartoon.png"
+                  src="@/assets/homepagecartoon.svg"
                   alt="Homepage Cartoon"
                   style="max-width: 100%; height: 100%"
                 />
