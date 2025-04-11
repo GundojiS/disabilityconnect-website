@@ -27,7 +27,7 @@
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link text-wrap text-center" style="max-width: 110px"
-            >Community Hub Secret</a
+            >Community Hub</a
           >
         </li>
         <li class="nav-item">
