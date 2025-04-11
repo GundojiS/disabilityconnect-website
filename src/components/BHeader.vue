@@ -26,7 +26,7 @@
           >
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link text-wrap text-center" style="max-width: 120px"
+          <a href="#" class="nav-link text-wrap text-center" style="max-width: 110px"
             >Community Hub Secret</a
           >
         </li>
@@ -36,7 +36,7 @@
           >
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link text-wrap text-center" style="max-width: 150px"
+          <a href="#" class="nav-link text-wrap text-center" style="max-width: 110px"
             >Accessibility Services</a
           >
         </li>
@@ -57,7 +57,12 @@
         </template>
 
         <li class="nav-item" v-if="isLoggedIn && isAdmin">
-          <router-link to="/admin-dashboard" class="nav-link">Admin Dashboard</router-link>
+          <router-link
+            to="/admin-dashboard"
+            class="nav-link text-wrap text-center"
+            style="max-width: 120px"
+            >Admin Dashboard</router-link
+          >
         </li>
 
         <li class="nav-item" v-if="isLoggedIn">

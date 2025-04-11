@@ -28,13 +28,13 @@
             </div>
           </div>
 
-          <!-- Conditionally Render the Admin Button -->
+          <!-- Conditionally Render the Admin Button
           <div v-if="isLoggedIn" class="mt-4">
             <button @click="makeAdmin" class="btn btn-success w-100">Make Me Admin</button>
           </div>
           <div v-else class="mt-4">
             <p>You must be logged in to become an admin.</p>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="col-lg-6">

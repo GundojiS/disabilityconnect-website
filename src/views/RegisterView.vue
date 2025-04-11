@@ -108,6 +108,8 @@
 // Our logic will go here
 import { ref } from 'vue'
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
+import { doc, setDoc } from 'firebase/firestore'
+import { db } from '@/firebaseConfig'
 import { useRouter } from 'vue-router'
 import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
@@ -127,11 +129,24 @@ const router = useRouter()
 const auth = getAuth()
 const register = () => {
   createUserWithEmailAndPassword(auth, formData.value.email, formData.value.password)
-    .then((userCredential) => {
+    .then(async (userCredential) => {
       // Signed in
       const user = userCredential.user
       console.log('User registered:', user)
       console.log(auth.currentUser)
+
+      // Add user info to Firestore
+      try {
+        await setDoc(doc(db, 'users', user.uid), {
+          email: user.email,
+          uid: user.uid,
+          isAdmin: false,
+        })
+        console.log('User data added to Firestore')
+      } catch (err) {
+        console.error('Error writing user to Firestore:', err)
+      }
+
       router.push('/')
     })
     .catch((error) => {

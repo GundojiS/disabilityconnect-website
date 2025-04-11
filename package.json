@@ -22,7 +22,8 @@
     "firebase-functions": "^6.3.2",
     "primevue": "^4.0.4",
     "vue": "^3.4.29",
-    "vue-router": "^4.4.3"
+    "vue-router": "^4.4.3",
+    "vue3-table-lite": "^1.4.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.24.0",
