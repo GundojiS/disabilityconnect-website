@@ -111,13 +111,17 @@ import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 import { useRouter } from 'vue-router'
 import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
-const formData = ref({
-  username: '',
-  password: '',
-  confirmPassword: '',
-  email: '',
-  isAdmin: 'false',
-})
+import useLocalStorage from '@/composables/useLocalStorage'
+const formData = useLocalStorage(
+  {
+    username: '',
+    password: '',
+    confirmPassword: '',
+    email: '',
+    isAdmin: 'false',
+  },
+  'formData',
+)
 
 const router = useRouter()
 const auth = getAuth()

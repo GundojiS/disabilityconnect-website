@@ -7,30 +7,32 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
-// Import the functions you need from the SDKs you need
-import { initializeApp } from 'firebase/app'
-import { getFunctions, httpsCallable } from 'firebase/functions'
-// Import Firestore SDK
-import { getFirestore } from 'firebase/firestore'
+// // Import the functions you need from the SDKs you need
+// import { initializeApp } from 'firebase/app'
+// import { getFunctions, httpsCallable } from 'firebase/functions'
+// // Import Firestore SDK
+// import { getFirestore } from 'firebase/firestore'
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: 'AIzaSyCRfSzTQNJIJzzTh0d_6ohOglfX4gkCArI',
-  authDomain: 'disability-connect-australia.firebaseapp.com',
-  projectId: 'disability-connect-australia',
-  storageBucket: 'disability-connect-australia.firebasestorage.app',
-  messagingSenderId: '1090916556007',
-  appId: '1:1090916556007:web:33080dd499509c133d9642',
-}
+// // Your web app's Firebase configuration
+// const firebaseConfig = {
+//   apiKey: 'AIzaSyCRfSzTQNJIJzzTh0d_6ohOglfX4gkCArI',
+//   authDomain: 'disability-connect-australia.firebaseapp.com',
+//   projectId: 'disability-connect-australia',
+//   storageBucket: 'disability-connect-australia.firebasestorage.app',
+//   messagingSenderId: '1090916556007',
+//   appId: '1:1090916556007:web:33080dd499509c133d9642',
+// }
 
-// Initialize Firebase
-const firebaseApp = initializeApp(firebaseConfig)
+// // Initialize Firebase
+// const firebaseApp = initializeApp(firebaseConfig)
 
-// Initialize Firestore
-const db = getFirestore(firebaseApp)
+// // Initialize Firestore
+// const db = getFirestore(firebaseApp)
 
-// Initialize Functions
-const functions = getFunctions(firebaseApp)
+// // Initialize Functions
+// const functions = getFunctions(firebaseApp)
+
+import { firebaseApp } from './firebaseConfig' // Just for init
 
 const app = createApp(App)
 

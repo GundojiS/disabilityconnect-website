@@ -29,6 +29,13 @@
             <div class="mt-4">
               <AppRating v-model="value" />
             </div>
+
+            <div class="mt-3">
+              <button class="btn btn-primary" @click="submitRating">Submit Rating</button>
+              <p class="mt-2">
+                Average Rating: {{ averageRating }} / 5 ({{ totalRatings }} ratings)
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -37,9 +44,43 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import { db, auth } from '@/firebaseConfig'
+import { collection, addDoc, getDocs, query, where } from 'firebase/firestore'
+import { onAuthStateChanged } from 'firebase/auth'
 
-const value = ref(0) // or whatever default rating you want
+const value = ref(0)
+const averageRating = ref(null)
+const user = ref(null)
+
+// Check auth state
+onMounted(() => {
+  onAuthStateChanged(auth, (u) => {
+    user.value = u
+    fetchRatings()
+  })
+})
+
+const submitRating = async () => {
+  if (!user.value) {
+    alert('You must be logged in to rate.')
+    return
+  }
+
+  await addDoc(collection(db, 'webinarRatings'), {
+    userId: user.value.uid,
+    rating: value.value,
+  })
+
+  fetchRatings()
+}
+
+const totalRatings = ref(0)
+
+const fetchRatings = async () => {
+  const snapshot = await getDocs(collection(db, 'webinarRatings'))
+  const ratings = snapshot.docs.map((doc) => doc.data().rating)
+  const total = ratings.reduce((a, b) => a + b, 0)
+  averageRating.value = ratings.length ? (total / ratings.length).toFixed(1) : 'No ratings yet'
+}
 </script>
-
-<style></style>
