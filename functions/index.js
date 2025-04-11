@@ -47,44 +47,98 @@
 //     })
 // })
 
-const functions = require('firebase-functions')
+const { onRequest } = require('firebase-functions/v2/https')
+// const { onDocumentCreated } = require('firebase-functions/v2/firestore')
 const admin = require('firebase-admin')
+const cors = require('cors')({ origin: true })
+
 admin.initializeApp()
 
-exports.addAdminRole = functions.https.onCall((data, context) => {
-  // Check if the user is authenticated by verifying the ID token
-  if (!context.auth) {
-    throw new functions.https.HttpsError('unauthenticated', 'Request not authenticated')
-  }
+// exports.countBooks = onRequest((req, res) => {
+//   cors(req, res, async () => {
+//     try {
+//       const booksCollection = admin.firestore().collection('books')
+//       const snapshot = await booksCollection.get()
+//       const count = snapshot.size
 
-  // Get the user ID from the email provided
-  const email = data.email
-  const idToken = data.idToken
+//       res.status(200).send({ count })
+//     } catch (error) {
+//       console.error('Error counting books:', error.message)
+//       res.status(500).send('Error counting books')
+//     }
+//   })
+// })
 
-  // Verify the ID token is valid
-  return admin
-    .auth()
-    .verifyIdToken(idToken)
-    .then((decodedToken) => {
-      // Check if the requesting user has admin privileges
-      if (!decodedToken.admin) {
-        throw new functions.https.HttpsError(
-          'permission-denied',
-          'You do not have permission to make this change.',
-        )
-      }
+// exports.capitalizeBookName = onDocumentCreated('/books/{bookId}', async (event) => {
+//   const bookData = event.data.data()
 
-      // Get user record from email
-      return admin.auth().getUserByEmail(email)
-    })
-    .then((userRecord) => {
-      // Set the custom claim for the user
-      return admin.auth().setCustomUserClaims(userRecord.uid, { admin: true })
-    })
-    .then(() => {
-      return { message: `Success! ${email} is now an admin.` }
-    })
-    .catch((error) => {
-      throw new functions.https.HttpsError('internal', error.message)
-    })
+//   if (bookData.name) {
+//     const capitalizedBookName = bookData.name.toUpperCase()
+
+//     await event.data.ref.update({
+//       name: capitalizedBookName,
+//     })
+//   }
+// })
+
+// exports.getAllBooks = onRequest(async (req, res) => {
+//   cors(req, res, async () => {
+//     try {
+//       const booksCollection = admin.firestore().collection('books')
+//       const snapshot = await booksCollection.get()
+//       const books = snapshot.docs.map((doc) => ({
+//         id: doc.id,
+//         isbn: doc.data().isbn,
+//         name: doc.data().name,
+//       }))
+
+//       res.status(200).json(books)
+//     } catch (error) {
+//       console.error('Error fetching books:', error.message)
+//       res.status(500).send('Error fetching books')
+//     }
+//   })
+// })
+
+exports.getAllAccessibilityProviders = onRequest(async (req, res) => {
+  cors(req, res, async () => {
+    try {
+      const accessibilityProvidersCollection = admin
+        .firestore()
+        .collection('accessibilityProviders')
+      const snapshot = await accessibilityProvidersCollection.get()
+      const accessibilityProviders = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        providerName: doc.data().providerName,
+        serviceType: doc.data().serviceType,
+        email: doc.data().contactEmail,
+        phoneNumber: doc.data().phoneNumber,
+        region: doc.data().region,
+      }))
+
+      res.status(200).json(accessibilityProviders)
+    } catch (error) {
+      console.error('Error fetching accessibility providers:', error.message)
+      res.status(500).send('Error fetching accessibility providers')
+    }
+  })
+})
+
+exports.getUsers = onRequest(async (req, res) => {
+  cors(req, res, async () => {
+    try {
+      const usersCollection = admin.firestore().collection('users')
+      const snapshot = await usersCollection.get()
+      const users = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        email: doc.data().email,
+        isAdmin: doc.data().isAdmin,
+      }))
+
+      res.status(200).json(users)
+    } catch (error) {
+      console.error('Error fetching accessibility providers:', error.message)
+      res.status(500).send('Error fetching accessibility providers')
+    }
+  })
 })

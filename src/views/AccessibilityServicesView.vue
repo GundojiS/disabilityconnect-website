@@ -171,6 +171,13 @@ onMounted(fetchProviders)
           </button>
         </div>
       </div>
+      <div class="text-center">
+        <router-link
+          to="/accessibility-services/get-all-accessibility-providersAPI"
+          class="btn btn-primary mt-3"
+          >Get Accessibility Services API</router-link
+        >
+      </div>
     </div>
   </div>
 </template>
@@ -192,15 +199,29 @@ const search = ref({
   region: '',
 })
 
+// const sortField = ref('providerName')      // default field
+// const sortDirection = ref('desc')          // default direction
+
+const sortProviders = () => {
+  providers.value.sort((a, b) => {
+    const aVal = a[sortField.value]?.toLowerCase?.() || ''
+    const bVal = b[sortField.value]?.toLowerCase?.() || ''
+    if (aVal < bVal) return sortDirection.value === 'asc' ? -1 : 1
+    if (aVal > bVal) return sortDirection.value === 'asc' ? 1 : -1
+    return 0
+  })
+}
+
 const fetchProviders = async () => {
   const snapshot = await getDocs(collection(db, 'accessibilityProviders'))
   providers.value = snapshot.docs.map((doc) => doc.data())
+  sortProviders()
 }
 
 onMounted(fetchProviders)
 
 // Sorting state
-const sortField = ref('')
+const sortField = ref('providerName')
 const sortDirection = ref('asc')
 
 const filteredProviders = computed(() => {

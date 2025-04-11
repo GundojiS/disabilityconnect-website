@@ -2,11 +2,14 @@
 import { ref, onMounted } from 'vue'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { getIdTokenResult } from 'firebase/auth'
+import { useRoute } from 'vue-router'
 import BHeader from './components/BHeader.vue'
 import BFooter from './components/BFooter.vue'
 
 // Define a reactive variable to store the admin status
 const isAdmin = ref(false)
+
+const route = useRoute()
 
 // Initialize Firebase authentication and check for the admin role
 onMounted(() => {
@@ -33,8 +36,7 @@ onMounted(() => {
 
 <template>
   <div class="main-container">
-    <header>
-      <!-- Pass the isAdmin prop to the BHeader component -->
+    <header v-if="!route.meta?.hideHeaderFooter">
       <BHeader :isAdmin="isAdmin" />
     </header>
 
@@ -42,7 +44,7 @@ onMounted(() => {
       <router-view></router-view>
     </main>
 
-    <footer>
+    <footer v-if="!route.meta?.hideHeaderFooter">
       <BFooter />
     </footer>
   </div>

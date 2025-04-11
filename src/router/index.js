@@ -8,6 +8,8 @@ import ResourcesAndInformationView from '@/views/ResourcesAndInformationView.vue
 import MyAccountView from '@/views/MyAccountView.vue'
 import AdminDashboardView from '@/views/AdminDashboardView.vue'
 import AccessibilityServicesView from '@/views/AccessibilityServicesView.vue'
+import getAllAccessibilityProvidersAPI from '@/views/getAllAccessibilityProvidersAPI.vue'
+import getUsersAPI from '@/views/getUsersAPI.vue'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { getDoc, doc } from 'firebase/firestore'
 import { db } from '@/firebaseConfig'
@@ -59,6 +61,18 @@ const routes = [
     path: '/accessibility-services',
     name: 'AccessibilityServices',
     component: AccessibilityServicesView,
+  },
+  {
+    path: '/accessibility-services/get-all-accessibility-providersAPI',
+    name: 'getAllAccessibilityProvidersAPI',
+    component: getAllAccessibilityProvidersAPI,
+    meta: { hideHeaderFooter: true },
+  },
+  {
+    path: '/admin-dashboard/get-usersAPI',
+    name: 'getUsersAPI',
+    component: getUsersAPI,
+    meta: { hideHeaderFooter: true },
   },
 ]
 

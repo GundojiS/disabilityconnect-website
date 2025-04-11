@@ -271,6 +271,11 @@ button:disabled {
           </button>
         </div>
       </div>
+      <div class="text-center">
+        <router-link to="/admin-dashboard/get-usersAPI" class="btn btn-primary mt-3"
+          >Get Users API</router-link
+        >
+      </div>
     </div>
   </div>
 </template>
