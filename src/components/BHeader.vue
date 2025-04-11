@@ -36,8 +36,11 @@
           >
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link text-wrap text-center" style="max-width: 110px"
-            >Accessibility Services</a
+          <router-link
+            to="/accessibility-services"
+            class="nav-link text-wrap text-center"
+            style="max-width: 110px"
+            >Accessibility Services</router-link
           >
         </li>
 
