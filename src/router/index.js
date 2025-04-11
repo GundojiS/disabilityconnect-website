@@ -6,6 +6,7 @@ import LoginView from '@/views/LoginView.vue'
 import WebinarView from '@/views/WebinarView.vue'
 import ResourcesAndInformationView from '@/views/ResourcesAndInformationView.vue'
 import MyAccountView from '@/views/MyAccountView.vue'
+import AdminDashboardView from '@/views/AdminDashboardView.vue'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
 const routes = [
@@ -43,6 +44,12 @@ const routes = [
     path: '/my-account',
     name: 'MyAccount',
     component: MyAccountView,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/admin-dashboard',
+    name: 'AdminDashboard',
+    component: AdminDashboardView,
     meta: { requiresAuth: true },
   },
 ]

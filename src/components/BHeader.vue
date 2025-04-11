@@ -55,6 +55,11 @@
             <router-link to="/login" class="nav-link">Login</router-link>
           </li>
         </template>
+
+        <li class="nav-item" v-if="isLoggedIn && isAdmin">
+          <router-link to="/admin-dashboard" class="nav-link">Admin Dashboard</router-link>
+        </li>
+
         <li class="nav-item" v-if="isLoggedIn">
           <router-link to="/my-account" class="nav-link">My Account</router-link>
         </li>
@@ -66,18 +71,35 @@
   </div>
 </template>
 
-<script setup>
+<!-- <script setup>
 import { ref, onMounted } from 'vue'
-import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { getFirestore, doc, getDoc } from 'firebase/firestore'
 import { useRouter } from 'vue-router'
 
 const isLoggedIn = ref(false)
+const isAdmin = ref(false)
 const router = useRouter()
 const auth = getAuth()
+const db = getFirestore()
 
 onMounted(() => {
-  onAuthStateChanged(auth, (user) => {
-    isLoggedIn.value = !!user
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      isLoggedIn.value = true
+
+      // Fetch the user document from Firestore using the UID
+      const userDocRef = doc(db, 'users', user.uid)
+      const userDocSnap = await getDoc(userDocRef)
+
+      if (userDocSnap.exists()) {
+        // Check if the user is an admin
+        isAdmin.value = userDocSnap.data().isAdmin || false
+      }
+    } else {
+      isLoggedIn.value = false
+      isAdmin.value = false
+    }
   })
 })
 
@@ -85,6 +107,51 @@ const handleSignOut = async () => {
   try {
     await signOut(auth)
     isLoggedIn.value = false
+    isAdmin.value = false
+    router.push('/')
+  } catch (error) {
+    console.error('Sign-out error:', error)
+  }
+}
+</script> -->
+
+<script setup>
+import { ref, onMounted } from 'vue'
+import { getAuth, onAuthStateChanged, signOut, getIdTokenResult } from 'firebase/auth'
+import { useRouter } from 'vue-router'
+import { getFirestore, doc, getDoc } from 'firebase/firestore'
+
+const isLoggedIn = ref(false)
+const isAdmin = ref(false) // Track if the user is an admin
+const router = useRouter()
+const auth = getAuth()
+const db = getFirestore()
+
+onMounted(() => {
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      isLoggedIn.value = true
+      // Check if the user has the admin custom claim
+      // Fetch the user document from Firestore using the UID
+      const userDocRef = doc(db, 'users', user.uid)
+      const userDocSnap = await getDoc(userDocRef)
+
+      if (userDocSnap.exists()) {
+        // Check if the user is an admin
+        isAdmin.value = userDocSnap.data().isAdmin || false
+      }
+    } else {
+      isLoggedIn.value = false
+      isAdmin.value = false // If no user is logged in, they are not an admin
+    }
+  })
+})
+
+const handleSignOut = async () => {
+  try {
+    await signOut(auth)
+    isLoggedIn.value = false
+    isAdmin.value = false // Reset admin flag on sign-out
     router.push('/')
   } catch (error) {
     console.error('Sign-out error:', error)

@@ -10,6 +10,8 @@ import router from './router'
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app'
 import { getFunctions, httpsCallable } from 'firebase/functions'
+// Import Firestore SDK
+import { getFirestore } from 'firebase/firestore'
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -23,6 +25,9 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig)
+
+// Initialize Firestore
+const db = getFirestore(firebaseApp)
 
 // Initialize Functions
 const functions = getFunctions(firebaseApp)
