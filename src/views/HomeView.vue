@@ -54,7 +54,7 @@
                 <!-- * * 100% like the demo example below.-->
                 <!-- <video muted="muted" autoplay="" loop="" style="max-width: 100%; height: 100%"><source src="assets/img/demo-screen.mp4" type="video/mp4"></video> -->
                 <img
-                  src="@/assets/homepagecartoon.svg"
+                  src="@/assets/homepagecartoon.png"
                   alt="Homepage Cartoon"
                   style="max-width: 100%; height: 100%"
                 />
