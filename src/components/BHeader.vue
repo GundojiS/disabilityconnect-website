@@ -13,7 +13,7 @@
         <span class="fs-4 logo-text">Disability Connect Australia </span>
       </a>
 
-      <ul class="nav nav-pills gap-2 ms-4">
+      <ul class="nav nav-pills gap-2 ms-4 align-items-center justify-content-center">
         <li class="nav-item">
           <router-link to="/" class="nav-link" aria-current="page">Home</router-link>
         </li>

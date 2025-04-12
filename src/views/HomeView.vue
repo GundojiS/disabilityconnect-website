@@ -60,10 +60,10 @@
                 />
               </div>
               <!-- Text showing the user admin status -->
-              <div v-if="isLoggedIn">
+              <!-- <div v-if="isLoggedIn">
                 <p v-if="isAdmin">You are an Admin!</p>
                 <p v-else>You are not an Admin.</p>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -73,34 +73,34 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
-import { getFirestore, doc, getDoc } from 'firebase/firestore'
+// import { ref, onMounted } from 'vue'
+// import { getAuth, onAuthStateChanged } from 'firebase/auth'
+// import { getFirestore, doc, getDoc } from 'firebase/firestore'
 
-const isLoggedIn = ref(false)
-const isAdmin = ref(false)
-const auth = getAuth()
-const db = getFirestore()
+// const isLoggedIn = ref(false)
+// const isAdmin = ref(false)
+// const auth = getAuth()
+// const db = getFirestore()
 
-onMounted(() => {
-  onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      isLoggedIn.value = true
+// onMounted(() => {
+//   onAuthStateChanged(auth, async (user) => {
+//     if (user) {
+//       isLoggedIn.value = true
 
-      // Fetch the user document from Firestore using the UID
-      const userDocRef = doc(db, 'users', user.uid)
-      const userDocSnap = await getDoc(userDocRef)
+//       // Fetch the user document from Firestore using the UID
+//       const userDocRef = doc(db, 'users', user.uid)
+//       const userDocSnap = await getDoc(userDocRef)
 
-      if (userDocSnap.exists()) {
-        // Check if the user is an admin
-        isAdmin.value = userDocSnap.data().isAdmin || false
-      }
-    } else {
-      isLoggedIn.value = false
-      isAdmin.value = false
-    }
-  })
-})
+//       if (userDocSnap.exists()) {
+//         // Check if the user is an admin
+//         isAdmin.value = userDocSnap.data().isAdmin || false
+//       }
+//     } else {
+//       isLoggedIn.value = false
+//       isAdmin.value = false
+//     }
+//   })
+// })
 </script>
 
 <!-- <script setup>
