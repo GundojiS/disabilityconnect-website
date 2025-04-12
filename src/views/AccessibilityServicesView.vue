@@ -178,6 +178,20 @@ onMounted(fetchProviders)
           >Get Accessibility Services API</router-link
         >
       </div>
+      <div class="text-center mt-4">
+        <button
+          @click="exportToCSV"
+          class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          Export as CSV
+        </button>
+        <button
+          @click="exportToPDF"
+          class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+        >
+          Export as PDF
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -186,6 +200,9 @@ onMounted(fetchProviders)
 import { ref, computed, onMounted } from 'vue'
 import { db } from '@/firebaseConfig'
 import { collection, getDocs } from 'firebase/firestore'
+
+import jsPDF from 'jspdf'
+import autoTable from 'jspdf-autotable'
 
 const providers = ref([])
 const currentPage = ref(1)
@@ -266,6 +283,50 @@ const sortBy = (field) => {
     if (a[field] > b[field]) return direction === 'asc' ? 1 : -1
     return 0
   })
+}
+
+const exportToCSV = () => {
+  const headers = ['Provider Name', 'Service Type', 'Email', 'Phone', 'Region']
+  const rows = providers.value.map((p) => [
+    p.providerName,
+    p.serviceType,
+    p.contactEmail,
+    p.phoneNumber,
+    p.region,
+  ])
+
+  const csvContent = [
+    headers.join(','),
+    ...rows.map((row) => row.map((cell) => `"${cell || ''}"`).join(',')),
+  ].join('\n')
+
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
+  const url = URL.createObjectURL(blob)
+
+  const link = document.createElement('a')
+  link.setAttribute('href', url)
+  link.setAttribute('download', 'accessibility_providers.csv')
+  link.click()
+}
+
+const exportToPDF = () => {
+  const doc = new jsPDF()
+
+  doc.text('Accessibility Providers', 14, 10)
+
+  autoTable(doc, {
+    startY: 20,
+    head: [['Provider Name', 'Service Type', 'Email', 'Phone', 'Region']],
+    body: providers.value.map((p) => [
+      p.providerName,
+      p.serviceType,
+      p.contactEmail,
+      p.phoneNumber,
+      p.region,
+    ]),
+  })
+
+  doc.save('accessibility_providers.pdf')
 }
 </script>
 
