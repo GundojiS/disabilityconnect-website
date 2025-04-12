@@ -20,11 +20,11 @@
             </p>
             <p class="lead">What you'll learn:</p>
             <ul class="lead">
-              <li>Latest advancements in assistive technology</li>
-              <li>Real-world applications and success stories</li>
-              <li>How to choose the right assistive devices for your needs</li>
-              <li>Future trends in the field of assistive technology</li>
-              <li>Q&A session with industry experts</li>
+              <li class="lead">Latest advancements in assistive technology</li>
+              <li class="lead">Real-world applications and success stories</li>
+              <li class="lead">How to choose the right assistive devices for your needs</li>
+              <li class="lead">Future trends in the field of assistive technology</li>
+              <li class="lead">Q&A session with industry experts</li>
             </ul>
             <div class="mt-4">
               <AppRating v-model="value" />
@@ -51,6 +51,7 @@ import { onAuthStateChanged } from 'firebase/auth'
 
 const value = ref(0)
 const averageRating = ref(null)
+const totalRatings = ref(null)
 const user = ref(null)
 
 // Check auth state
@@ -75,12 +76,13 @@ const submitRating = async () => {
   fetchRatings()
 }
 
-const totalRatings = ref(0)
+// const totalRatings = ref(0)
 
 const fetchRatings = async () => {
   const snapshot = await getDocs(collection(db, 'webinarRatings'))
   const ratings = snapshot.docs.map((doc) => doc.data().rating)
   const total = ratings.reduce((a, b) => a + b, 0)
   averageRating.value = ratings.length ? (total / ratings.length).toFixed(1) : 'No ratings yet'
+  totalRatings.value = ratings.length
 }
 </script>
