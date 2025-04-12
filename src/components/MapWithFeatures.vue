@@ -42,7 +42,11 @@ onMounted(() => {
     <h1 class="text-2xl font-bold">Interactive Map with Features</h1>
     <p class="mt-2 text-gray-600">Click anywhere on the map to drop a marker.</p>
   </div>
-  <div id="map" class="w-full h-[500px] rounded shadow-lg mx-auto mt-4" style="width: 1000px"></div>
+  <div
+    id="map"
+    class="w-full h-[500px] rounded shadow-lg mx-auto mt-4"
+    style="width: 85%; max-width: 1000px"
+  ></div>
 </template>
 
 <script setup>
