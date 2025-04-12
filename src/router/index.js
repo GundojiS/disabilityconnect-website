@@ -9,6 +9,7 @@ import MyAccountView from '@/views/MyAccountView.vue'
 import AdminDashboardView from '@/views/AdminDashboardView.vue'
 import AccessibilityServicesView from '@/views/AccessibilityServicesView.vue'
 import getAllAccessibilityProvidersAPI from '@/views/getAllAccessibilityProvidersAPI.vue'
+import ProvidersByRegionView from '@/views/ProvidersByRegionView.vue'
 import getUsersAPI from '@/views/getUsersAPI.vue'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { getDoc, doc } from 'firebase/firestore'
@@ -73,6 +74,11 @@ const routes = [
     name: 'getUsersAPI',
     component: getUsersAPI,
     meta: { hideHeaderFooter: true },
+  },
+  {
+    path: '/accessibility-services/providers-by-region',
+    name: 'ProvidersByRegion',
+    component: ProvidersByRegionView,
   },
 ]
 

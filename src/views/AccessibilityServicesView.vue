@@ -177,24 +177,23 @@ onMounted(fetchProviders)
           class="btn btn-primary mt-3"
           >Get Accessibility Services API</router-link
         >
-      </div>
-      <div class="text-center mt-4">
-        <button
-          @click="exportToCSV"
-          class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        <span class="text-sm px-1"></span>
+        <router-link to="/accessibility-services/providers-by-region" class="btn btn-primary mt-3"
+          >View Providers by Region Graph</router-link
         >
+      </div>
+
+      <div class="text-center mt-4">
+        <button @click="exportToCSV" class="px-4 py-2 bg-grey text-white rounded">
           Export as CSV
         </button>
-        <button
-          @click="exportToPDF"
-          class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
-        >
+        <button @click="exportToPDF" class="px-4 py-2 bg-grey text-white rounded">
           Export as PDF
         </button>
       </div>
-      <div>
+      <!-- <div>
         <InteractiveChart />
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -203,7 +202,7 @@ onMounted(fetchProviders)
 import { ref, computed, onMounted } from 'vue'
 import { db } from '@/firebaseConfig'
 import { collection, getDocs } from 'firebase/firestore'
-import InteractiveChart from '@/components/AccessibilityServicesInteractiveChart.vue'
+// import InteractiveChart from '@/components/AccessibilityServicesInteractiveChart.vue'
 import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
 
