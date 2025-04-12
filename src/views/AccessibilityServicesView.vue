@@ -97,7 +97,7 @@ onMounted(fetchProviders)
                 <input
                   type="text"
                   v-model="search.providerName"
-                  class="w-full rounded border border-gray-300 p-1 text-sm focus:ring focus:ring-blue-200 focus:outline-none"
+                  class="rounded border p-2 text-sm bg-white text-black"
                   placeholder="Search provider"
                 />
               </td>
@@ -105,7 +105,7 @@ onMounted(fetchProviders)
                 <input
                   type="text"
                   v-model="search.serviceType"
-                  class="w-full rounded border border-gray-300 p-1 text-sm focus:ring focus:ring-blue-200 focus:outline-none"
+                  class="rounded border p-2 text-sm bg-white text-black"
                   placeholder="Search service"
                 />
               </td>
@@ -113,7 +113,7 @@ onMounted(fetchProviders)
                 <input
                   type="text"
                   v-model="search.contactEmail"
-                  class="w-full rounded border border-gray-300 p-1 text-sm focus:ring focus:ring-blue-200 focus:outline-none"
+                  class="rounded border p-2 text-sm bg-white text-black"
                   placeholder="Search email"
                 />
               </td>
@@ -121,7 +121,7 @@ onMounted(fetchProviders)
                 <input
                   type="text"
                   v-model="search.phoneNumber"
-                  class="w-full rounded border border-gray-300 p-1 text-sm focus:ring focus:ring-blue-200 focus:outline-none"
+                  class="rounded border p-2 text-sm bg-white text-black"
                   placeholder="Search phone"
                 />
               </td>
@@ -129,7 +129,7 @@ onMounted(fetchProviders)
                 <input
                   type="text"
                   v-model="search.region"
-                  class="w-full rounded border border-gray-300 p-1 text-sm focus:ring focus:ring-blue-200 focus:outline-none"
+                  class="rounded border p-2 text-sm bg-white text-black"
                   placeholder="Search region"
                 />
               </td>
@@ -192,6 +192,9 @@ onMounted(fetchProviders)
           Export as PDF
         </button>
       </div>
+      <div>
+        <InteractiveChart />
+      </div>
     </div>
   </div>
 </template>
@@ -200,7 +203,7 @@ onMounted(fetchProviders)
 import { ref, computed, onMounted } from 'vue'
 import { db } from '@/firebaseConfig'
 import { collection, getDocs } from 'firebase/firestore'
-
+import InteractiveChart from '@/components/AccessibilityServicesInteractiveChart.vue'
 import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
 
@@ -338,7 +341,7 @@ table td {
 }
 
 input {
-  margin-top: 0.25rem; /* Adds a bit of space to make it look cleaner */
+  margin-top: 0.25rem;
 }
 
 .cursor-pointer {

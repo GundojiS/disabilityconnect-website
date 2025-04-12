@@ -217,7 +217,7 @@ button:disabled {
                 <input
                   type="text"
                   v-model="search.email"
-                  class="mt-1 block w-full rounded border border-gray-300 p-1 text-sm focus:ring focus:ring-blue-200 focus:outline-none"
+                  class="rounded border p-2 text-sm bg-white text-black"
                   placeholder="Search email"
                 />
               </td>
@@ -225,7 +225,7 @@ button:disabled {
                 <input
                   type="text"
                   v-model="search.uid"
-                  class="mt-1 block w-full rounded border border-gray-300 p-1 text-sm focus:ring focus:ring-blue-200 focus:outline-none"
+                  class="rounded border p-2 text-sm bg-white text-black"
                   placeholder="Search UID"
                 />
               </td>
@@ -233,7 +233,7 @@ button:disabled {
                 <input
                   type="text"
                   v-model="search.isAdmin"
-                  class="mt-1 block w-full rounded border border-gray-300 p-1 text-sm focus:ring focus:ring-blue-200 focus:outline-none"
+                  class="rounded border p-2 text-sm bg-white text-black"
                   placeholder="true / false"
                 />
               </td>

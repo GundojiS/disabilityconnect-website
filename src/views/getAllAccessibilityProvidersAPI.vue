@@ -19,7 +19,7 @@ export default {
         const response = await axios.get(
           'https://getallaccessibilityproviders-2k7ll73aka-uc.a.run.app',
         )
-        this.allaccessibilityprovidersdata = response.data // Store the list of books
+        this.allaccessibilityprovidersdata = response.data // Store the list of providers
         this.error = null
       } catch (error) {
         console.error('Error fetching providers:', error)
