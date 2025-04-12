@@ -147,6 +147,19 @@ onMounted(fetchProviders)
               <td class="border border-gray-300 p-2">{{ provider.phoneNumber }}</td>
               <td class="border border-gray-300 p-2">{{ provider.region }}</td>
             </tr>
+
+            <!-- Empty rows to fill the table -->
+            <tr
+              v-for="n in rowsPerPage - paginatedProviders.length"
+              :key="'empty-' + n"
+              class="h-[52px] border border-gray-300"
+            >
+              <td class="border border-gray-300 p-2">&nbsp;</td>
+              <td class="border border-gray-300 p-2">&nbsp;</td>
+              <td class="border border-gray-300 p-2">&nbsp;</td>
+              <td class="border border-gray-300 p-2">&nbsp;</td>
+              <td class="border border-gray-300 p-2">&nbsp;</td>
+            </tr>
           </tbody>
         </table>
       </div>
