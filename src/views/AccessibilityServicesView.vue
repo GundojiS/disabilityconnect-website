@@ -184,10 +184,11 @@ onMounted(fetchProviders)
       </div>
 
       <div class="text-center mt-4">
-        <button @click="exportToCSV" class="px-4 py-2 bg-grey text-white rounded">
+        <button @click="exportToCSV" class="px-4 py-2 bg-white text-black border-2 rounded">
           Export as CSV
         </button>
-        <button @click="exportToPDF" class="px-4 py-2 bg-grey text-white rounded">
+        <span class="px-1"></span>
+        <button @click="exportToPDF" class="px-4 py-2 bg-white text-black border-2 rounded">
           Export as PDF
         </button>
       </div>
