@@ -7,6 +7,8 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
+import 'leaflet/dist/leaflet.css'
+
 import { firebaseApp } from './firebaseConfig' // Just for init
 
 const app = createApp(App)

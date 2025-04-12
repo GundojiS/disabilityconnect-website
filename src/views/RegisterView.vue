@@ -25,8 +25,7 @@
                 class="form-control"
                 id="email"
                 v-model="formData.email"
-                @blur="() => validateEmail(true)"
-                @input="() => validateEmail(false)"
+                @input="validateEmail"
               />
               <div v-if="errors.email" class="text-danger">{{ errors.email }}</div>
             </div>
@@ -39,8 +38,7 @@
                 class="form-control"
                 id="password"
                 v-model="formData.password"
-                @blur="() => validatePassword(true)"
-                @input="() => validatePassword(false)"
+                @input="validatePassword"
               />
               <div v-if="errors.password" class="text-danger">{{ errors.password }}</div>
             </div>
@@ -232,12 +230,25 @@ const validateConfirmPassword = (blur) => {
 //   }
 // }
 
-const validateEmail = (blur) => {
+// const validateEmail = (blur) => {
+//   const email = formData.value.email
+//   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+//   if (email === '') {
+//     if (blur) errors.value.email = 'Email is required'
+//   } else if (!emailRegex.test(email)) {
+//     errors.value.email = 'Please enter a valid email address'
+//   } else {
+//     errors.value.email = null
+//   }
+// }
+
+const validateEmail = () => {
   const email = formData.value.email
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
   if (email === '') {
-    if (blur) errors.value.email = 'Email is required'
+    errors.value.email = 'Email is required'
   } else if (!emailRegex.test(email)) {
     errors.value.email = 'Please enter a valid email address'
   } else {
@@ -245,25 +256,50 @@ const validateEmail = (blur) => {
   }
 }
 
-const validatePassword = (blur) => {
+// const validatePassword = (blur) => {
+//   const password = formData.value.password
+//   const minLength = 8
+//   const hasUppercase = /[A-Z]/.test(password)
+//   const hasLowercase = /[a-z]/.test(password)
+//   const hasNumber = /\d/.test(password)
+//   const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>"]/.test(password)
+//   if (password.length < minLength) {
+//     if (blur) errors.value.password = `Password must be at least ${minLength} characters long.`
+//   } else if (!hasUppercase) {
+//     if (blur) errors.value.password = 'Password must contain at least one uppercase letter.'
+//   } else if (!hasLowercase) {
+//     if (blur) errors.value.password = 'Password must contain at least one lowercase letter.'
+//   } else if (!hasNumber) {
+//     if (blur) errors.value.password = 'Password must contain at least one number.'
+//   } else if (!hasSpecialChar) {
+//     if (blur) errors.value.password = 'Password must contain at least one special character.'
+//   } else {
+//     errors.value.password = null
+//   }
+// }
+
+// Real-time validation function
+const validatePassword = () => {
   const password = formData.value.password
   const minLength = 8
   const hasUppercase = /[A-Z]/.test(password)
   const hasLowercase = /[a-z]/.test(password)
   const hasNumber = /\d/.test(password)
   const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>"]/.test(password)
+
+  // Check the password criteria and update the error message
   if (password.length < minLength) {
-    if (blur) errors.value.password = `Password must be at least ${minLength} characters long.`
+    errors.value.password = `Password must be at least ${minLength} characters long.`
   } else if (!hasUppercase) {
-    if (blur) errors.value.password = 'Password must contain at least one uppercase letter.'
+    errors.value.password = 'Password must contain at least one uppercase letter.'
   } else if (!hasLowercase) {
-    if (blur) errors.value.password = 'Password must contain at least one lowercase letter.'
+    errors.value.password = 'Password must contain at least one lowercase letter.'
   } else if (!hasNumber) {
-    if (blur) errors.value.password = 'Password must contain at least one number.'
+    errors.value.password = 'Password must contain at least one number.'
   } else if (!hasSpecialChar) {
-    if (blur) errors.value.password = 'Password must contain at least one special character.'
+    errors.value.password = 'Password must contain at least one special character.'
   } else {
-    errors.value.password = null
+    errors.value.password = null // Clear error if all conditions are met
   }
 }
 </script>
