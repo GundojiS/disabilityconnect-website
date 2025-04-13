@@ -1,5 +1,6 @@
 import './assets/main.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
+// import 'bootstrap/dist/css/bootstrap.min.css'
+import './assets/custom-bootstrap.scss'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import PrimeVue from 'primevue/config'
 import Aura from '@primevue/themes/aura'

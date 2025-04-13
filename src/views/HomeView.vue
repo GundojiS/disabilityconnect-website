@@ -17,7 +17,9 @@
                 </div> -->
           <div class="row">
             <div class="col-6 mb-3">
-              <a href="#!" class="btn btn-primary w-100">Learn More</a>
+              <router-link to="/about-us/our-mission" class="btn btn-primary w-100"
+                >Learn More</router-link
+              >
             </div>
             <div class="col-6 mb-3">
               <router-link
@@ -56,7 +58,7 @@
                 <img
                   src="@/assets/homepagecartoon.png"
                   alt="Homepage Cartoon"
-                  style="max-width: 100%; height: 100%"
+                  style="max-width: 100%; max-height: 100%"
                 />
               </div>
               <!-- Text showing the user admin status -->

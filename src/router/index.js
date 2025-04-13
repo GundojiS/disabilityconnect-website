@@ -1,15 +1,23 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import OurMissionView from '../views/OurMissionView.vue'
+import OurVisionView from '@/views/OurVisionView.vue'
+import OurValuesView from '@/views/OurValuesView.vue'
+import VolunteeringOpportunitiesView from '@/views/VolunteeringOpportunities.vue'
+import CareersView from '@/views/CareersView.vue'
+import ContactUsView from '@/views/ContactUsView.vue'
+import FeedbackAndSuggestionsView from '@/views/FeedbackAndSuggestionsView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import LoginView from '@/views/LoginView.vue'
 import WebinarView from '@/views/WebinarView.vue'
 import ResourcesAndInformationView from '@/views/ResourcesAndInformationView.vue'
+import CommunityHubView from '@/views/CommunityHubView.vue'
 import MyAccountView from '@/views/MyAccountView.vue'
 import AdminDashboardView from '@/views/AdminDashboardView.vue'
 import AccessibilityServicesView from '@/views/AccessibilityServicesView.vue'
 import getAllAccessibilityProvidersAPI from '@/views/getAllAccessibilityProvidersAPI.vue'
 import ProvidersByRegionView from '@/views/ProvidersByRegionView.vue'
+import DiscoverNearbyCommunitiesView from '@/views/DiscoverNearbyCommunitiesView.vue'
 import getUsersAPI from '@/views/getUsersAPI.vue'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { getDoc, doc } from 'firebase/firestore'
@@ -25,6 +33,36 @@ const routes = [
     path: '/about-us/our-mission',
     name: 'Our Mission',
     component: OurMissionView,
+  },
+  {
+    path: '/about-us/our-vision',
+    name: 'Our Vision',
+    component: OurVisionView,
+  },
+  {
+    path: '/about-us/our-values',
+    name: 'Our Values',
+    component: OurValuesView,
+  },
+  {
+    path: '/get-involved/volunteering-opportunities',
+    name: 'Volunteering Opportunities',
+    component: VolunteeringOpportunitiesView,
+  },
+  {
+    path: '/get-involved/careers',
+    name: 'Careers',
+    component: CareersView,
+  },
+  {
+    path: '/get-in-touch/contact-us',
+    name: 'Contact Us',
+    component: ContactUsView,
+  },
+  {
+    path: '/get-in-touch/feedback-and-suggestions',
+    name: 'Feedback and Suggestions',
+    component: FeedbackAndSuggestionsView,
   },
   {
     path: '/register',
@@ -45,6 +83,11 @@ const routes = [
     path: '/resources-and-information',
     name: 'ResourcesAndInformation',
     component: ResourcesAndInformationView,
+  },
+  {
+    path: '/community-hub',
+    name: 'CommunityHub',
+    component: CommunityHubView,
   },
   {
     path: '/my-account',
@@ -79,6 +122,11 @@ const routes = [
     path: '/accessibility-services/providers-by-region',
     name: 'ProvidersByRegion',
     component: ProvidersByRegionView,
+  },
+  {
+    path: '/discover-nearby-communities',
+    name: 'DiscoverNearbyCommunities',
+    component: DiscoverNearbyCommunitiesView,
   },
 ]
 

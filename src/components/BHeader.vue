@@ -3,15 +3,17 @@
     <header
       class="position-sticky top-0 d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom"
     >
-      <a
-        href="/"
+      <router-link
+        to="/"
         class="d-flex align-items-center mb-3 mb-md-0 me-xxl-auto link-body-emphasis text-decoration-none"
+        :active-class="''"
+        :exact-active-class="''"
       >
         <!-- <svg class="bi me-2" width="40" height="32" aria-hidden="true">
           <use xlink:href="#bootstrap"></use>
         </svg> -->
         <span class="fs-4 logo-text">Disability Connect Australia </span>
-      </a>
+      </router-link>
 
       <ul class="nav nav-pills gap-2 align-items-center justify-content-center">
         <li class="nav-item">
@@ -26,13 +28,16 @@
           >
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link text-wrap text-center" style="max-width: 110px"
-            >Community Hub</a
+          <router-link to="/community-hub" class="nav-link text-wrap text-center" style="max-width: 110px"
+            >Community Hub</router-link to="/"
           >
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link text-wrap text-center" style="max-width: 150px"
-            >Employment and Education</a
+          <router-link
+            to="/discover-nearby-communities"
+            class="nav-link text-wrap text-center"
+            style="max-width: 160px"
+            >Discover Nearby Communities</router-link
           >
         </li>
         <li class="nav-item">
@@ -287,7 +292,7 @@ header {
 
 /* Customize the active link's style */
 .router-link-active {
-  background-color: #0d6efd; /* Blue background for active link */
+  background-color: #057996; /* Blue background for active link */
   color: white; /* White text for active link */
 }
 
