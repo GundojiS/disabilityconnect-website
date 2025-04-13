@@ -34,7 +34,7 @@
   </section>
 </template>
 
-<script setup>
+<!-- <script setup>
 import { ref, onMounted } from 'vue'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
@@ -52,6 +52,38 @@ onMounted(() => {
       // Check for custom admin claim
       const idTokenResult = await user.getIdTokenResult()
       isAdmin.value = !!idTokenResult.claims.admin
+    }
+  })
+})
+</script> -->
+
+<script setup>
+import { ref, onMounted } from 'vue'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { getFirestore, doc, getDoc } from 'firebase/firestore'
+
+const auth = getAuth()
+const db = getFirestore()
+
+const userEmail = ref('')
+const displayName = ref('')
+const isAdmin = ref(false)
+
+onMounted(() => {
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      userEmail.value = user.email || ''
+      displayName.value = user.email?.split('@')[0] || 'User'
+
+      // Get user document from Firestore
+      const userDocRef = doc(db, 'users', user.uid)
+      const userDocSnap = await getDoc(userDocRef)
+
+      if (userDocSnap.exists()) {
+        isAdmin.value = !!userDocSnap.data().isAdmin
+      } else {
+        console.warn('User document not found in Firestore.')
+      }
     }
   })
 })
