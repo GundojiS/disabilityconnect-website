@@ -4,7 +4,11 @@
       <div class="row align-items-center gx-4">
         <div class="col-md-5">
           <div class="ms-md-2 ms-lg-5">
-            <img class="img-fluid rounded-3" src="@/assets/assistive-technology-cartoon.jpeg" />
+            <img
+              class="img-fluid rounded-3"
+              style="width: 100%; max-width: 800px; height: 100%; max-height: 800px"
+              src="@/assets/assistive-technology-cartoon.png"
+            />
           </div>
         </div>
         <div class="col-md-6 offset-md-1">
