@@ -34,8 +34,16 @@
               <AppRating v-model="value" />
             </div>
 
-            <div class="mt-3">
+            <!-- <div class="mt-3">
               <button class="btn btn-primary" @click="submitRating">Submit Rating</button>
+              <p class="mt-2">
+                Average Rating: {{ averageRating }} / 5 ({{ totalRatings }} ratings)
+              </p>
+            </div> -->
+            <div class="mt-3">
+              <button class="btn btn-primary" @click="submitRating" :disabled="hasRated">
+                {{ hasRated ? 'Rating Submitted' : 'Submit Rating' }}
+              </button>
               <p class="mt-2">
                 Average Rating: {{ averageRating }} / 5 ({{ totalRatings }} ratings)
               </p>
@@ -57,18 +65,30 @@ const value = ref(0)
 const averageRating = ref(null)
 const totalRatings = ref(null)
 const user = ref(null)
+const hasRated = ref(false)
 
-// Check auth state
 onMounted(() => {
   onAuthStateChanged(auth, (u) => {
     user.value = u
+    if (user.value) checkIfUserHasRated()
     fetchRatings()
   })
 })
 
+const checkIfUserHasRated = async () => {
+  const q = query(collection(db, 'webinarRatings'), where('userId', '==', user.value.uid))
+  const snapshot = await getDocs(q)
+  hasRated.value = !snapshot.empty
+}
+
 const submitRating = async () => {
   if (!user.value) {
     alert('You must be logged in to rate.')
+    return
+  }
+
+  if (hasRated.value) {
+    alert('You have already submitted a rating.')
     return
   }
 
@@ -77,10 +97,9 @@ const submitRating = async () => {
     rating: value.value,
   })
 
+  hasRated.value = true
   fetchRatings()
 }
-
-// const totalRatings = ref(0)
 
 const fetchRatings = async () => {
   const snapshot = await getDocs(collection(db, 'webinarRatings'))
