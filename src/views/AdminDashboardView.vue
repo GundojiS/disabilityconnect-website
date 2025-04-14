@@ -207,6 +207,12 @@ button:disabled {
                 Admin
                 <span v-if="sortKey === 'isAdmin'">{{ sortOrder === 'asc' ? '🔼' : '🔽' }}</span>
               </th>
+              <th class="border border-gray-300 p-2 cursor-pointer" @click="sort('isSubscribed')">
+                Subscriber
+                <span v-if="sortKey === 'isSubscribed'">{{
+                  sortOrder === 'asc' ? '🔼' : '🔽'
+                }}</span>
+              </th>
             </tr>
           </thead>
 
@@ -237,6 +243,14 @@ button:disabled {
                   placeholder="true / false"
                 />
               </td>
+              <td class="border border-gray-300 p-2">
+                <input
+                  type="text"
+                  v-model="search.isSubscribed"
+                  class="rounded border p-2 text-sm bg-white text-black"
+                  placeholder="true / false"
+                />
+              </td>
             </tr>
           </tbody>
 
@@ -246,6 +260,7 @@ button:disabled {
               <td class="border border-gray-300 p-2">{{ user.email }}</td>
               <td class="border border-gray-300 p-2">{{ user.uid }}</td>
               <td class="border border-gray-300 p-2">{{ user.isAdmin }}</td>
+              <td class="border border-gray-300 p-2">{{ user.isSubscribed }}</td>
             </tr>
 
             <!-- Empty rows to fill the table -->
@@ -254,6 +269,7 @@ button:disabled {
               :key="'empty-' + n"
               class="h-[52px] border border-gray-300"
             >
+              <td class="border border-gray-300 p-2">&nbsp;</td>
               <td class="border border-gray-300 p-2">&nbsp;</td>
               <td class="border border-gray-300 p-2">&nbsp;</td>
               <td class="border border-gray-300 p-2">&nbsp;</td>
@@ -282,10 +298,15 @@ button:disabled {
           </button>
         </div>
       </div>
-      <div class="text-center">
+      <div class="text-center mb-1">
         <router-link to="/admin-dashboard/get-usersAPI" class="btn btn-primary mt-3"
           >Get Users API</router-link
         >
+      </div>
+      <div class="text-center">
+        <button @click="sendNewsletter" class="btn btn-primary w-20 mt-2">
+          Send Newsletter to Subscribers
+        </button>
       </div>
     </div>
   </div>
@@ -306,6 +327,7 @@ const search = ref({
   email: '',
   uid: '',
   isAdmin: '',
+  isSubscribed: '',
 })
 
 const fetchUsers = async () => {
@@ -322,7 +344,9 @@ const filteredUsers = computed(() => {
         user.email?.toLowerCase().includes(search.value.email.toLowerCase())) &&
       (!search.value.uid || user.uid?.toLowerCase().includes(search.value.uid.toLowerCase())) &&
       (!search.value.isAdmin ||
-        String(user.isAdmin).toLowerCase().includes(search.value.isAdmin.toLowerCase())),
+        String(user.isAdmin).toLowerCase().includes(search.value.isAdmin.toLowerCase())) &&
+      (!search.value.isSubscribed ||
+        String(user.isSubscribed).toLowerCase().includes(search.value.isSubscribed.toLowerCase())),
   )
 })
 
@@ -361,6 +385,30 @@ const sort = (key) => {
     sortOrder.value = 'asc'
   }
 }
+
+const sendNewsletter = async () => {
+  const subscribedUsers = users.value.filter((user) => user.isSubscribed)
+
+  if (subscribedUsers.length === 0) {
+    alert('No subscribers found.')
+    return
+  }
+
+  for (const user of subscribedUsers) {
+    const url = new URL('https://email-2k7ll73aka-uc.a.run.app')
+    url.searchParams.append('to', user.email)
+    url.searchParams.append('subject', 'Your Newsletter')
+    url.searchParams.append('text', 'Hello from Disability Connect! Thanks for subscribing.')
+
+    try {
+      await fetch(url.toString())
+    } catch (error) {
+      console.error(`Failed to send to ${user.email}:`, error)
+    }
+  }
+
+  alert(`Newsletter sent to ${subscribedUsers.length} subscribers.`)
+}
 </script>
 
 <style scoped>
@@ -371,7 +419,7 @@ table td {
 }
 
 input {
-  margin-top: 0.25rem; /* Adds a bit of space to make it look cleaner */
+  margin-top: 0.25rem;
 }
 
 .cursor-pointer {

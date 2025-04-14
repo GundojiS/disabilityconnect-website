@@ -28,6 +28,23 @@
             <p class="lead">
               Keep an eye out for updates, stories, and resources that matter to you.
             </p>
+            <!-- Subscribe and Unsubscribe Buttons -->
+            <button
+              v-if="!isSubscribed"
+              @click="subscribeToNewsletter"
+              class="btn btn-primary w-100 mt-4"
+            >
+              Subscribe to Newsletter
+            </button>
+
+            <button
+              v-else
+              @click="unsubscribeFromNewsletter"
+              class="btn btn-outline-danger w-100 mt-4"
+            >
+              Unsubscribe from Newsletter
+            </button>
+
             <!-- <a href="#!" class="btn btn-primary w-100">Download Newsletter</a>
             <h5 class="fw-semibold">Welcome back, {{ displayName }}!</h5>
             <p class="text-muted mb-1">{{ userEmail }}</p> -->
@@ -38,14 +55,18 @@
   </section>
 </template>
 
-<!-- <script setup>
+<script setup>
 import { ref, onMounted } from 'vue'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { getFirestore, doc, getDoc, updateDoc } from 'firebase/firestore'
 
 const auth = getAuth()
+const db = getFirestore()
+
 const userEmail = ref('')
 const displayName = ref('')
 const isAdmin = ref(false)
+const isSubscribed = ref(false) // Track subscription status
 
 onMounted(() => {
   onAuthStateChanged(auth, async (user) => {
@@ -53,15 +74,58 @@ onMounted(() => {
       userEmail.value = user.email || ''
       displayName.value = user.email?.split('@')[0] || 'User'
 
-      // Check for custom admin claim
-      const idTokenResult = await user.getIdTokenResult()
-      isAdmin.value = !!idTokenResult.claims.admin
+      // Get user document from Firestore
+      const userDocRef = doc(db, 'users', user.uid)
+      const userDocSnap = await getDoc(userDocRef)
+
+      if (userDocSnap.exists()) {
+        const userData = userDocSnap.data()
+        isAdmin.value = !!userData.isAdmin
+        isSubscribed.value = !!userData.isSubscribed // Check if the user is already subscribed
+      } else {
+        console.warn('User document not found in Firestore.')
+      }
     }
   })
 })
-</script> -->
 
-<script setup>
+// Method to subscribe to the newsletter
+const subscribeToNewsletter = async () => {
+  const user = auth.currentUser
+  if (user) {
+    try {
+      const userDocRef = doc(db, 'users', user.uid)
+      await updateDoc(userDocRef, {
+        isSubscribed: true,
+      })
+      isSubscribed.value = true
+      alert('You have successfully subscribed to the newsletter!')
+    } catch (error) {
+      console.error('Error subscribing to newsletter:', error)
+      alert('There was an error subscribing to the newsletter. Please try again later.')
+    }
+  }
+}
+
+const unsubscribeFromNewsletter = async () => {
+  const user = auth.currentUser
+  if (user) {
+    try {
+      const userDocRef = doc(db, 'users', user.uid)
+      await updateDoc(userDocRef, {
+        isSubscribed: false,
+      })
+      isSubscribed.value = false
+      alert('You have unsubscribed from the newsletter.')
+    } catch (error) {
+      console.error('Error unsubscribing:', error)
+      alert('There was an error unsubscribing. Please try again later.')
+    }
+  }
+}
+</script>
+
+<!-- <script setup>
 import { ref, onMounted } from 'vue'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { getFirestore, doc, getDoc } from 'firebase/firestore'
@@ -93,4 +157,4 @@ onMounted(() => {
 })
 </script>
 
-<style></style>
+<style></style> -->

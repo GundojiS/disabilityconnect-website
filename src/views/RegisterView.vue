@@ -118,6 +118,7 @@ const formData = useLocalStorage(
     confirmPassword: '',
     email: '',
     isAdmin: 'false',
+    isSubscribed: 'false',
   },
   'formData',
 )
@@ -138,6 +139,7 @@ const register = () => {
           email: user.email,
           uid: user.uid,
           isAdmin: false,
+          isSubscribed: false,
         })
         console.log('User data added to Firestore')
       } catch (err) {
@@ -299,7 +301,7 @@ const validatePassword = () => {
   } else if (!hasSpecialChar) {
     errors.value.password = 'Password must contain at least one special character.'
   } else {
-    errors.value.password = null // Clear error if all conditions are met
+    errors.value.password = null
   }
 }
 </script>
