@@ -8,6 +8,7 @@
               class="img-fluid rounded-3 mb-2"
               style="width: 120%; max-width: 800px; height: 120%; max-height: 800px"
               src="@/assets/our-vision.png"
+              alt="Our Vision Cartoon"
             />
           </div>
         </div>

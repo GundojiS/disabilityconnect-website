@@ -4,7 +4,11 @@
       <div class="row align-items-center gx-4">
         <div class="col-md-5">
           <div class="ms-md-2 ms-lg-5">
-            <img class="img-fluid rounded-3" src="@/assets/resources-and-information.png" />
+            <img
+              class="img-fluid rounded-3"
+              src="@/assets/resources-and-information.png"
+              alt="Cartoon of man reading book"
+            />
           </div>
         </div>
         <div class="col-md-6 offset-md-1 mt-2">

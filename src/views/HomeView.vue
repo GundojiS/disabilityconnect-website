@@ -50,22 +50,12 @@
               data-color="black"
             >
               <div class="screen">
-                <!-- PUT CONTENTS HERE:-->
-                <!-- * * This can be a video, image, or just about anything else.-->
-                <!-- * * Set the max width of your media to 100% and the height to-->
-                <!-- * * 100% like the demo example below.-->
-                <!-- <video muted="muted" autoplay="" loop="" style="max-width: 100%; height: 100%"><source src="assets/img/demo-screen.mp4" type="video/mp4"></video> -->
                 <img
                   src="@/assets/homepagecartoon.png"
-                  alt="Homepage Cartoon"
+                  alt="Cartoon representing people with various disabilities"
                   style="max-width: 100%; max-height: 100%"
                 />
               </div>
-              <!-- Text showing the user admin status -->
-              <!-- <div v-if="isLoggedIn">
-                <p v-if="isAdmin">You are an Admin!</p>
-                <p v-else>You are not an Admin.</p>
-              </div> -->
             </div>
           </div>
         </div>

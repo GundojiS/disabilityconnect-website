@@ -7,7 +7,7 @@
             <img
               class="img-fluid rounded-3"
               src="@/assets/community-hub.png"
-              alt="Community connection image"
+              alt="Community connection cartoon"
             />
           </div>
         </div>
