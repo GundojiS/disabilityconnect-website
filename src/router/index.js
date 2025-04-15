@@ -148,6 +148,7 @@ const getCurrentUser = () => {
   })
 }
 
+// Navigation guard to check authentication and admin status
 router.beforeEach(async (to, from) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     const user = await getCurrentUser()

@@ -46,6 +46,7 @@
           >
         </li>
 
+        <!-- Conditionally show login and register if not logged in -->
         <template v-if="!isLoggedIn">
           <li class="nav-item">
             <router-link to="/register" class="nav-link">Register</router-link>
@@ -55,6 +56,7 @@
           </li>
         </template>
 
+        <!-- Conditionally show admin dashboard if logged in and admin -->
         <li class="nav-item" v-if="isLoggedIn && isAdmin">
           <router-link
             to="/admin-dashboard"
@@ -64,6 +66,7 @@
           >
         </li>
 
+        <!-- Conditionally show account page and sign out header if logged in -->
         <li class="nav-item" v-if="isLoggedIn">
           <router-link to="/my-account" class="nav-link">My Account</router-link>
         </li>

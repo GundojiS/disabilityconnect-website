@@ -52,6 +52,7 @@ const fetchData = async () => {
   const labels = Object.keys(regionCounts)
   const data = Object.values(regionCounts)
 
+  // Style chart
   chartData.value = {
     labels,
     datasets: [

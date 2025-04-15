@@ -196,7 +196,7 @@ const fetchProviders = async () => {
 
 onMounted(fetchProviders)
 
-// Sorting state
+// Default sorting state
 const sortField = ref('providerName')
 const sortDirection = ref('asc')
 
@@ -244,6 +244,7 @@ const sortBy = (field) => {
   })
 }
 
+// Export to csv function
 const exportToCSV = () => {
   const headers = ['Provider Name', 'Service Type', 'Email', 'Phone', 'Region']
   const rows = providers.value.map((p) => [
@@ -268,6 +269,7 @@ const exportToCSV = () => {
   link.click()
 }
 
+// Export to pdf function
 const exportToPDF = () => {
   const doc = new jsPDF()
 

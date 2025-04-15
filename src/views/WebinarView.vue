@@ -68,12 +68,14 @@ onMounted(() => {
   })
 })
 
+// Function to check if the user has already rated
 const checkIfUserHasRated = async () => {
   const q = query(collection(db, 'webinarRatings'), where('userId', '==', user.value.uid))
   const snapshot = await getDocs(q)
   hasRated.value = !snapshot.empty
 }
 
+// Function to submit a rating
 const submitRating = async () => {
   if (!user.value) {
     alert('You must be logged in to rate.')

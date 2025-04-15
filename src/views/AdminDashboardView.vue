@@ -77,7 +77,7 @@
               <td class="border border-gray-300 p-2">{{ user.isSubscribed }}</td>
             </tr>
 
-            <!-- Empty rows to fill the table -->
+            <!-- Empty rows to fill the table to set consistent table height -->
             <tr
               v-for="n in rowsPerPage - paginatedUsers.length"
               :key="'empty-' + n"
@@ -92,7 +92,6 @@
         </table>
       </div>
 
-      <!-- Pagination Controls -->
       <div class="w-full flex justify-center mt-4 text-center">
         <div class="inline-flex items-center space-x-4">
           <button
@@ -198,6 +197,7 @@ const sort = (key) => {
   }
 }
 
+// Function to send newsletter to subscribed users
 const sendNewsletter = async () => {
   const subscribedUsers = users.value.filter((user) => user.isSubscribed)
 

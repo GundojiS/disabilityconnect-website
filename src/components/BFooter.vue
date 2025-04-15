@@ -92,6 +92,7 @@ import { ref } from 'vue'
 
 const email = ref('')
 
+// Function to append valid email input to email cloud function
 const subscribe = async () => {
   if (!email.value) return
 

@@ -4,6 +4,7 @@ const cors = require('cors')({ origin: true })
 
 admin.initializeApp()
 
+// Cloud Function to fetch all accessibility providers
 exports.getAllAccessibilityProviders = onRequest(async (req, res) => {
   cors(req, res, async () => {
     try {
@@ -28,6 +29,7 @@ exports.getAllAccessibilityProviders = onRequest(async (req, res) => {
   })
 })
 
+// Cloud Function to fetch all users
 exports.getUsers = onRequest(async (req, res) => {
   cors(req, res, async () => {
     try {
@@ -47,6 +49,7 @@ exports.getUsers = onRequest(async (req, res) => {
   })
 })
 
+// Cloud Function to send email with attachment
 const functions = require('firebase-functions')
 const express = require('express')
 const nodemailer = require('nodemailer')
