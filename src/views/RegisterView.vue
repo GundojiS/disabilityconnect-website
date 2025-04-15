@@ -5,19 +5,6 @@
         <h1 class="text-center mb-5">Register</h1>
         <form @submit.prevent="submitForm">
           <div class="row mb-3">
-            <!-- <div class="col-md-6">
-              <label for="username" class="form-label">Username</label>
-              <input
-                type="text"
-                class="form-control"
-                id="username"
-                v-model="formData.username"
-                @blur="() => validateName(true)"
-                @input="() => validateName(false)"
-              />
-              <div v-if="errors.username" class="text-danger">{{ errors.username }}</div>
-            </div> -->
-
             <div class="col-md-6">
               <label for="email" class="form-label">Email</label>
               <input
@@ -56,17 +43,6 @@
                 {{ errors.confirmPassword }}
               </div>
             </div>
-            <!-- <div class="col-md-6 mt-2">
-              <div class="form-check">
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  id="isAdmin"
-                  v-model="formData.isAdmin"
-                />
-                <label class="form-check-label" for="isAdmin">Register as an Admin?</label>
-              </div>
-            </div> -->
           </div>
           <div class="text-center">
             <button type="submit" class="btn btn-primary me-2" @click="register">Submit</button>
@@ -76,33 +52,9 @@
       </div>
     </div>
   </div>
-
-  <!-- <div class="row mt-5" v-if="submittedCards.length">
-   <div class="d-flex flex-wrap justify-content-start">
-      <div v-for="(card, index) in submittedCards" :key="index" class="card m-2" style="width: 18rem;">
-         <div class="card-header">
-            User Information
-         </div>
-         <ul class="list-group list-group-flush">
-            <li class="list-group-item">Username: {{ card.username }}</li>
-            <li class="list-group-item">Password: {{ card.password }}</li>
-            <li class="list-group-item">Australian Resident: {{ card.isAustralian ? 'Yes' : 'No' }}</li>
-            <li class="list-group-item">Gender: {{ card.gender }}</li>
-            <li class="list-group-item">Reason: {{ card.reason }}</li>
-         </ul>
-      </div>
-   </div>
-</div> -->
-
-  <!-- <DataTable :value="submittedCards" tableStyle="min-width: 30rem">
-    <Column field="email" header="Email"></Column>
-    <Column field="password" header="Password"></Column>
-    <Column field="isAdmin" header="Is Admin?"></Column>
-  </DataTable> -->
 </template>
 
 <script setup>
-// Our logic will go here
 import { ref } from 'vue'
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 import { doc, setDoc } from 'firebase/firestore'
@@ -128,12 +80,9 @@ const auth = getAuth()
 const register = () => {
   createUserWithEmailAndPassword(auth, formData.value.email, formData.value.password)
     .then(async (userCredential) => {
-      // Signed in
       const user = userCredential.user
       console.log('User registered:', user)
       console.log(auth.currentUser)
-
-      // Add user info to Firestore
       try {
         await setDoc(doc(db, 'users', user.uid), {
           email: user.email,
@@ -158,17 +107,8 @@ const register = () => {
 const submittedCards = ref([])
 
 const submitForm = () => {
-  // validateName(true)
   validatePassword(true)
   validateEmail(true)
-  // validateUser(true)
-
-  // if (!errors.value.username && !errors.value.password && !errors.value.email) {
-  //   submittedCards.value.push({
-  //     ...formData.value,
-  //   })
-  //   clearForm()
-  // }
 
   if (!errors.value.password && !errors.value.email) {
     submittedCards.value.push({
@@ -186,22 +126,11 @@ const clearForm = () => {
   }
 }
 
-// const errors = ref({
-//   username: null,
-//   password: null,
-//   confirmPassword: null,
-//   email: null,
-// })
-
 const errors = ref({
   password: null,
   confirmPassword: null,
   email: null,
 })
-
-// const success = ref({
-//   reason: null,
-// })
 
 const validateConfirmPassword = (blur) => {
   if (formData.value.password !== formData.value.confirmPassword) {
@@ -210,40 +139,6 @@ const validateConfirmPassword = (blur) => {
     errors.value.confirmPassword = null
   }
 }
-
-// const validateName = (blur) => {
-//   if (formData.value.username.length < 3) {
-//     if (blur) errors.value.username = 'Name must be at least 3 characters'
-//   } else {
-//     errors.value.username = null
-//   }
-// }
-
-// const validateUser = (blur) => {
-//   if (submittedCards.value.length === 0) {
-//     errors.value.username = null
-//     return
-//   }
-//   const userExists = submittedCards.value.some((e) => e.username === formData.value.username)
-//   if (userExists) {
-//     if (blur) errors.value.username = 'User already exists, please choose a different username.'
-//   } else {
-//     errors.value.username = null
-//   }
-// }
-
-// const validateEmail = (blur) => {
-//   const email = formData.value.email
-//   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-
-//   if (email === '') {
-//     if (blur) errors.value.email = 'Email is required'
-//   } else if (!emailRegex.test(email)) {
-//     errors.value.email = 'Please enter a valid email address'
-//   } else {
-//     errors.value.email = null
-//   }
-// }
 
 const validateEmail = () => {
   const email = formData.value.email
@@ -257,28 +152,6 @@ const validateEmail = () => {
     errors.value.email = null
   }
 }
-
-// const validatePassword = (blur) => {
-//   const password = formData.value.password
-//   const minLength = 8
-//   const hasUppercase = /[A-Z]/.test(password)
-//   const hasLowercase = /[a-z]/.test(password)
-//   const hasNumber = /\d/.test(password)
-//   const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>"]/.test(password)
-//   if (password.length < minLength) {
-//     if (blur) errors.value.password = `Password must be at least ${minLength} characters long.`
-//   } else if (!hasUppercase) {
-//     if (blur) errors.value.password = 'Password must contain at least one uppercase letter.'
-//   } else if (!hasLowercase) {
-//     if (blur) errors.value.password = 'Password must contain at least one lowercase letter.'
-//   } else if (!hasNumber) {
-//     if (blur) errors.value.password = 'Password must contain at least one number.'
-//   } else if (!hasSpecialChar) {
-//     if (blur) errors.value.password = 'Password must contain at least one special character.'
-//   } else {
-//     errors.value.password = null
-//   }
-// }
 
 // Real-time validation function
 const validatePassword = () => {

@@ -33,13 +33,6 @@
             <div class="mt-4">
               <AppRating v-model="value" />
             </div>
-
-            <!-- <div class="mt-3">
-              <button class="btn btn-primary" @click="submitRating">Submit Rating</button>
-              <p class="mt-2">
-                Average Rating: {{ averageRating }} / 5 ({{ totalRatings }} ratings)
-              </p>
-            </div> -->
             <div class="mt-3">
               <button class="btn btn-primary" @click="submitRating" :disabled="hasRated">
                 {{ hasRated ? 'Rating Submitted' : 'Submit Rating' }}

@@ -1,6 +1,5 @@
 <template>
   <div class="login d-flex justify-content-center mt-5">
-    <!-- <form @submit.prevent="submitForm" style="max-width: 400px; width: 100%"> -->
     <form @submit.prevent="login" style="max-width: 400px; width: 100%">
       <div class="text-center mb-4">
         <h1>Log in</h1>
@@ -14,7 +13,6 @@
       <div class="mb-3">
         <label for="password" class="form-label">Password</label>
         <input type="password" class="form-control" id="password" v-model="formData.password" />
-        <!-- <div v-if="errors.password" class="text-danger">{{ errors.password }}</div> -->
       </div>
 
       <div v-if="errorMessages" class="text-danger mb-3">{{ errorMessages }}</div>
@@ -27,11 +25,9 @@
 </template>
 
 <script setup>
-// Our logic will go here
 import { ref } from 'vue'
 import router from '@/router'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
-// import { authState } from './authenticationState'
 
 const formData = ref({
   email: '',
@@ -44,7 +40,6 @@ const login = () => {
   const auth = getAuth()
   signInWithEmailAndPassword(auth, formData.value.email, formData.value.password)
     .then((userCredential) => {
-      // Signed in
       const user = userCredential.user
       console.log('User logged in:', user)
       router.push('/')
@@ -65,43 +60,8 @@ const login = () => {
           errorMessages.value = 'Email or passowrd was incorrect'
           break
       }
-      // const errorCode = error.code
-      // const errorMessage = error.message
-      // console.error('Error logging in:', errorCode, errorMessage)
-      // errors.value.password = 'Incorrect email or password.'
     })
 }
-
-// const submitForm = () => {
-//   if (validateCredentials()) {
-//     authState.login()
-//     router.push('/')
-//     clearForm()
-//   }
-// }
-
-// const clearForm = () => {
-//   formData.value = {
-//     username: '',
-//     password: '',
-//   }
-// }
-
-// const errors = ref({
-//   username: null,
-//   password: null,
-// })
-
-// const validateCredentials = () => {
-//   const password = formData.value.password
-//   const username = formData.value.username
-//   if (username == '12345678' && password == '12345678') {
-//     return true
-//   } else {
-//     errors.value.password = `Incorrect email or password.`
-//     return false
-//   }
-// }
 </script>
 
 <style scoped>

@@ -13,7 +13,6 @@
         </div>
         <div class="col-md-6 offset-md-1 mt-2">
           <div class="ms-md-2 ms-lg-5">
-            <!-- <span class="text-muted">Guides, Help and Useful Links</span> -->
             <h2 class="display-5 fw-bold">Resources and Information</h2>
             <p class="lead">
               Explore practical guides, accessible tools, and helpful services to support people
@@ -70,14 +69,10 @@
         </div>
       </div>
     </div>
-    <!-- <div>
-      <MapWithFeatures />
-    </div> -->
   </section>
 </template>
 
 <script setup>
-// No script needed for now
 import MapWithFeatures from '@/components/MapWithFeatures.vue'
 </script>
 

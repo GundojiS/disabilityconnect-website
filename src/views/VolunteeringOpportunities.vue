@@ -63,6 +63,4 @@ const volunteerRoles = [
 ]
 </script>
 
-<style scoped>
-/* Optional styles if you want hover or table tweaks */
-</style>
+<style scoped></style>

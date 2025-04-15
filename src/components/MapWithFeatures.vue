@@ -1,42 +1,3 @@
-<!-- <template>
-  <div id="map" style="height: 400px"></div>
-</template>
-
-<script setup>
-import { onMounted } from 'vue'
-import L from 'leaflet'
-import 'leaflet/dist/leaflet.css'
-
-onMounted(() => {
-  const map = L.map('map').setView([-33.8688, 151.2093], 13) // Example: Sydney
-
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap contributors',
-  }).addTo(map)
-
-  // Feature 1: Marker
-  L.marker([-33.8688, 151.2093]).addTo(map).bindPopup('Sydney City Center').openPopup()
-
-  // Feature 2: Circle
-  L.circle([-33.87, 151.22], {
-    color: 'blue',
-    fillColor: '#3f51b5',
-    fillOpacity: 0.4,
-    radius: 500,
-  })
-    .addTo(map)
-    .bindPopup('500m Radius')
-})
-</script>
-
-<style scoped>
-#map {
-  width: 100%;
-  border-radius: 8px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
-}
-</style> -->
-
 <template>
   <div class="text-center mt-3">
     <h1 class="text-2xl font-bold">Find communities near you</h1>
@@ -57,7 +18,6 @@ import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png'
 import markerIcon from 'leaflet/dist/images/marker-icon.png'
 import markerShadow from 'leaflet/dist/images/marker-shadow.png'
 
-// 🛠 Fix broken marker icons when deployed
 delete L.Icon.Default.prototype._getIconUrl
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: markerIcon2x,
@@ -66,9 +26,8 @@ L.Icon.Default.mergeOptions({
 })
 
 onMounted(() => {
-  const map = L.map('map').setView([-33.8688, 151.2093], 5) // Defaults to Sydney
+  const map = L.map('map').setView([-33.8688, 151.2093], 5)
 
-  // Load map tiles
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors',
   }).addTo(map)
@@ -160,7 +119,6 @@ onMounted(() => {
     { name: 'Tuggeranong Access Point', coords: [-35.4169, 149.0675] },
   ]
 
-  // Add all accessibility service markers
   const allMarkers = [
     ...sydneyMarkers,
     ...melbourneMarkers,
@@ -175,7 +133,6 @@ onMounted(() => {
     L.marker(location.coords).addTo(map).bindPopup(location.name)
   })
 
-  // Try to locate the user's position
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -183,10 +140,8 @@ onMounted(() => {
         const userLng = position.coords.longitude
         const userCoords = [userLat, userLng]
 
-        // Set map view to user's location, zoomed out to see possible service markers
         map.setView(userCoords, 11)
 
-        // Add user location marker
         L.marker(userCoords).addTo(map).bindPopup('Current location').openPopup()
       },
       () => {

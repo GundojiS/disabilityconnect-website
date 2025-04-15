@@ -1,189 +1,3 @@
-<!-- <template>
-  <section class="py-5">
-    <div class="container">
-      <div class="row align-items-center gx-4">
-        <div class="col-md-5">
-          <div class="ms-md-2 ms-lg-5">
-            <img class="img-fluid rounded-3" src="https://freefrontend.dev/assets/square.png" />
-          </div>
-        </div>
-        <div class="col-md-6 offset-md-1">
-          <div class="ms-md-2 ms-lg-5">
-            <span class="text-muted">Hi There</span>
-            <h2 class="display-5 fw-bold">Admin Dashboard</h2>
-            <p class="lead">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
-            </p>
-            <p class="lead mb-0">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</template>
-
-<script setup>
-// No script needed for now
-</script>
-
-<style></style> -->
-
-<!-- <template>
-  <div class="table-container">
-    <h2>Admin Dashboard</h2>
-    <input
-      type="text"
-      v-model="searchQuery"
-      placeholder="Search..."
-      @input="filterData"
-      class="search-bar"
-    />
-    <table class="centered-table">
-      <thead>
-        <tr>
-          <th @click="sortTable('email')">Email</th>
-          <th @click="sortTable('uid')">UID</th>
-          <th @click="sortTable('isAdmin')">Admin</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(user, index) in paginatedData" :key="index">
-          <td>{{ user.email }}</td>
-          <td>{{ user.uid }}</td>
-          <td>{{ user.isAdmin ? 'Yes' : 'No' }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="pagination">
-      <button @click="changePage(currentPage - 1)" :disabled="currentPage === 1">Prev</button>
-      <span>Page {{ currentPage }}</span>
-      <button @click="changePage(currentPage + 1)" :disabled="currentPage >= totalPages">
-        Next
-      </button>
-    </div>
-  </div>
-</template>
-
-<script setup>
-import { ref, computed } from 'vue'
-import { db } from '@/firebaseConfig'
-import { collection, getDocs } from 'firebase/firestore'
-
-const users = ref([])
-const searchQuery = ref('')
-const currentPage = ref(1)
-const rowsPerPage = 10
-
-// Fetch users from Firestore
-const fetchUsers = async () => {
-  const querySnapshot = await getDocs(collection(db, 'users'))
-  users.value = querySnapshot.docs.map((doc) => ({
-    email: doc.data().email,
-    uid: doc.id,
-    isAdmin: doc.data().isAdmin,
-  }))
-}
-
-// Sort the table by a column
-const sortColumn = ref('email')
-const sortTable = (column) => {
-  if (sortColumn.value === column) {
-    users.value.reverse()
-  } else {
-    users.value.sort((a, b) => {
-      if (a[column] < b[column]) return -1
-      if (a[column] > b[column]) return 1
-      return 0
-    })
-    sortColumn.value = column
-  }
-}
-
-// Search the data based on query
-const filterData = () => {
-  if (searchQuery.value) {
-    users.value = users.value.filter(
-      (user) =>
-        user.email.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-        user.uid.includes(searchQuery.value) ||
-        (user.isAdmin ? 'Yes' : 'No').includes(searchQuery.value),
-    )
-  } else {
-    fetchUsers()
-  }
-}
-
-// Pagination
-const totalPages = computed(() => Math.ceil(users.value.length / rowsPerPage))
-const paginatedData = computed(() => {
-  const start = (currentPage.value - 1) * rowsPerPage
-  return users.value.slice(start, start + rowsPerPage)
-})
-
-const changePage = (page) => {
-  if (page > 0 && page <= totalPages.value) {
-    currentPage.value = page
-  }
-}
-
-fetchUsers()
-</script>
-
-<style scoped>
-.table-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px;
-}
-
-.search-bar {
-  margin-bottom: 10px;
-  padding: 5px;
-  width: 300px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.centered-table {
-  width: 80%;
-  margin-top: 20px;
-  border-collapse: collapse;
-  text-align: left;
-}
-
-.centered-table th,
-.centered-table td {
-  padding: 10px;
-  border: 1px solid #ddd;
-}
-
-.centered-table th {
-  cursor: pointer;
-  background-color: #f4f4f4;
-}
-
-.centered-table tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-.pagination {
-  display: flex;
-  justify-content: space-between;
-  width: 80%;
-  margin-top: 20px;
-}
-
-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-</style> -->
-
 <template>
   <div class="flex justify-center mt-10">
     <div class="w-full max-w-6xl">
@@ -320,8 +134,8 @@ import { collection, getDocs } from 'firebase/firestore'
 const users = ref([])
 const currentPage = ref(1)
 const rowsPerPage = 10
-const sortKey = ref('email') // Default sort key
-const sortOrder = ref('asc') // Default sort order
+const sortKey = ref('email')
+const sortOrder = ref('asc')
 
 const search = ref({
   email: '',
@@ -377,10 +191,8 @@ const prevPage = () => {
 
 const sort = (key) => {
   if (sortKey.value === key) {
-    // Toggle sort order
     sortOrder.value = sortOrder.value === 'asc' ? 'desc' : 'asc'
   } else {
-    // Set sort order to ascending for a new key
     sortKey.value = key
     sortOrder.value = 'asc'
   }

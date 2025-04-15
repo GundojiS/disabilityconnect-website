@@ -34,13 +34,6 @@
                 >Volunteering Opportunities</router-link
               >
             </li>
-            <!-- <li class="nav-item mb-2">
-              <router-link
-                to="/get-involved/partner-with-us"
-                class="nav-link p-0 text-body-secondary"
-                >Partner with us</router-link
-              >
-            </li> -->
             <li class="nav-item mb-2">
               <router-link to="/get-involved/careers" class="nav-link p-0 text-body-secondary"
                 >Careers</router-link
@@ -66,23 +59,6 @@
             </li>
           </ul>
         </div>
-
-        <!-- <div class="col-md-5 offset-md-1 mb-3">
-          <form>
-            <h5>Subscribe to our newsletter</h5>
-            <p>Monthly digest of what's new and exciting from us.</p>
-            <div class="d-flex flex-column flex-sm-row w-100 gap-2">
-              <label for="newsletter1" class="visually-hidden">Email address</label>
-              <input
-                id="newsletter1"
-                type="email"
-                class="form-control"
-                placeholder="Email address"
-              />
-              <button class="btn btn-primary" type="button">Subscribe</button>
-            </div>
-          </form>
-        </div> -->
 
         <div class="col-md-5 offset-md-1 mb-3">
           <form @submit.prevent="subscribe">

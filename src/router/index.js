@@ -148,22 +148,7 @@ const getCurrentUser = () => {
   })
 }
 
-// router.beforeEach(async (to, from) => {
-//   if (to.matched.some((record) => record.meta.requiresAuth)) {
-//     const user = await getCurrentUser()
-//     if (user) {
-//       return true // allow navigation
-//     } else {
-//       alert('You need to be logged in to access this page.')
-//       return '/' // redirect to home
-//     }
-//   }
-
-//   return true // allow navigation if no auth required
-// })
-
 router.beforeEach(async (to, from) => {
-  // Only protect routes with meta.requiresAuth
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     const user = await getCurrentUser()
 
@@ -172,29 +157,26 @@ router.beforeEach(async (to, from) => {
       return '/'
     }
 
-    // Check specifically for admin access
     if (to.path === '/admin-dashboard') {
       try {
         const userDocRef = doc(db, 'users', user.uid)
         const userSnap = await getDoc(userDocRef)
 
         if (userSnap.exists() && userSnap.data().isAdmin) {
-          return true // admin allowed
+          return true
         } else {
           alert('You do not have permission to access the admin dashboard.')
-          return '/' // not an admin
+          return '/'
         }
       } catch (error) {
         console.error('Error checking admin status:', error)
-        return '/' // fail-safe
+        return '/'
       }
     }
 
-    // Authenticated and not admin route — allow
     return true
   }
 
-  // No auth required — allow
   return true
 })
 

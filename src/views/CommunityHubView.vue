@@ -67,7 +67,7 @@
               <router-link to="/get-in-touch/feedback-and-suggestions">
                 Feedback and Suggestions</router-link
               >
-              page—we’d love to hear from you.
+              page—we'd love to hear from you.
             </p>
           </div>
         </div>

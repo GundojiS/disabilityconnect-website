@@ -1,38 +1,3 @@
-<!-- <template>
-  <section class="py-4">
-    <div class="container">
-      <div class="row align-items-center gx-4">
-        <div class="col-md-5">
-          <div class="ms-md-2 ms-lg-5">
-            <img class="img-fluid rounded-3 mb-2" src="@/assets/our-mission.jpg" />
-          </div>
-        </div>
-        <div class="col-md-6 offset-md-1">
-          <div class="ms-md-2 ms-lg-5">
-            <span class="text-muted">About Us</span>
-            <h2 class="display-5 fw-bold">Our Mission</h2>
-            <p class="lead">
-              At Disability Connect Australia, our mission is to create a more inclusive world by
-              making accessibility a priority—not an afterthought.
-            </p>
-            <p class="lead">
-              We strive to remove barriers, promote equal opportunities, and empower individuals of
-              all abilities through thoughtful solutions and community-driven support.
-            </p>
-            <p class="lead mb-0">Everyone deserves access. We’re here to make that happen.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</template>
-
-<script setup>
-// No script needed for now
-</script>
-
-<style></style> -->
-
 <template>
   <div class="container my-3">
     <h1 class="text-3xl font-semibold mb-6 text-center">Feedback & Suggestions</h1>
@@ -42,7 +7,6 @@
     </p>
 
     <div class="row py-3">
-      <!-- Left Column -->
       <div class="col-md-6 mb-4">
         <h3>How to Reach Us</h3>
         <ul>
@@ -70,7 +34,6 @@
         </p>
       </div>
 
-      <!-- Right Column -->
       <div class="col-md-6">
         <h3>What Happens Next?</h3>
         <p>
@@ -96,12 +59,6 @@
   </div>
 </template>
 
-<!-- <script>
-export default {
-  name: 'FeedbackAndSuggestions',
-}
-</script> -->
-
 <style scoped>
 ul {
   padding-left: 1rem;
@@ -110,12 +67,4 @@ ul {
 ul li {
   margin-bottom: 0.75rem;
 }
-
-/* a {
-  color: #0d6efd;
-} */
-
-/* a:hover {
-  text-decoration: underline;
-} */
 </style>

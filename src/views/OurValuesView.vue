@@ -35,15 +35,6 @@
                 Integrity: We are committed to transparency, accountability, and meaningful impact.
               </li>
             </ul>
-            <!-- <p class="lead">
-              At Disability Connect Australia, our mission is to create a more inclusive world by
-              making accessibility a priority—not an afterthought.
-            </p> -->
-            <!-- <p class="lead">
-              We strive to remove barriers, promote equal opportunities, and empower individuals of
-              all abilities through thoughtful solutions and community-driven support.
-            </p>
-            <p class="lead mb-0">Everyone deserves access. We’re here to make that happen.</p> -->
           </div>
         </div>
       </div>
@@ -51,8 +42,6 @@
   </section>
 </template>
 
-<script setup>
-// No script needed for now
-</script>
+<script setup></script>
 
 <style></style>

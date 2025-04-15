@@ -1,50 +1,3 @@
-<!-- <template>
-  <div class="flex justify-center mt-10">
-    <div class="w-full max-w-6xl">
-      <h2 class="text-xl font-semibold mb-4 text-center">Accessibility Service Providers</h2>
-      <div class="overflow-x-auto">
-        <table
-          class="mx-auto table-auto border-collapse border border-gray-300 w-full text-left text-sm"
-        >
-          <thead>
-            <tr class="bg-gray-200">
-              <th class="border border-gray-300 p-2">Provider Name</th>
-              <th class="border border-gray-300 p-2">Service Type</th>
-              <th class="border border-gray-300 p-2">Email</th>
-              <th class="border border-gray-300 p-2">Phone</th>
-              <th class="border border-gray-300 p-2">Region</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(provider, index) in providers" :key="index" class="hover:bg-gray-100">
-              <td class="border border-gray-300 p-2">{{ provider.providerName }}</td>
-              <td class="border border-gray-300 p-2">{{ provider.serviceType }}</td>
-              <td class="border border-gray-300 p-2">{{ provider.contactEmail }}</td>
-              <td class="border border-gray-300 p-2">{{ provider.phoneNumber }}</td>
-              <td class="border border-gray-300 p-2">{{ provider.region }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</template>
-
-<script setup>
-import { ref, onMounted } from 'vue'
-import { db } from '@/firebaseConfig'
-import { collection, getDocs } from 'firebase/firestore'
-
-const providers = ref([])
-
-const fetchProviders = async () => {
-  const snapshot = await getDocs(collection(db, 'accessibilityProviders'))
-  providers.value = snapshot.docs.map((doc) => doc.data())
-}
-
-onMounted(fetchProviders)
-</script> -->
-
 <template>
   <div class="flex justify-center mt-10">
     <div class="w-full max-w-6xl">
@@ -91,7 +44,6 @@ onMounted(fetchProviders)
                 </span>
               </th>
             </tr>
-            <!-- Search row directly below the headers -->
             <tr class="bg-gray-100">
               <td class="border border-gray-300 p-2">
                 <input
@@ -148,7 +100,6 @@ onMounted(fetchProviders)
               <td class="border border-gray-300 p-2">{{ provider.region }}</td>
             </tr>
 
-            <!-- Empty rows to fill the table -->
             <tr
               v-for="n in rowsPerPage - paginatedProviders.length"
               :key="'empty-' + n"
@@ -164,7 +115,6 @@ onMounted(fetchProviders)
         </table>
       </div>
 
-      <!-- Pagination Controls -->
       <div class="w-full flex justify-center mt-4 text-center">
         <div class="inline-flex items-center space-x-4">
           <button
@@ -205,9 +155,6 @@ onMounted(fetchProviders)
           Export as PDF
         </button>
       </div>
-      <!-- <div>
-        <InteractiveChart />
-      </div> -->
     </div>
   </div>
 </template>
@@ -216,7 +163,6 @@ onMounted(fetchProviders)
 import { ref, computed, onMounted } from 'vue'
 import { db } from '@/firebaseConfig'
 import { collection, getDocs } from 'firebase/firestore'
-// import InteractiveChart from '@/components/AccessibilityServicesInteractiveChart.vue'
 import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
 
@@ -231,9 +177,6 @@ const search = ref({
   phoneNumber: '',
   region: '',
 })
-
-// const sortField = ref('providerName')      // default field
-// const sortDirection = ref('desc')          // default direction
 
 const sortProviders = () => {
   providers.value.sort((a, b) => {

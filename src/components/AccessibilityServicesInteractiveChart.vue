@@ -17,16 +17,13 @@ import {
 } from 'chart.js'
 import { getFirestore, collection, getDocs } from 'firebase/firestore'
 
-// Register components for bar charts
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, BarController)
 
 const chartRef = ref(null)
 
-// Firestore setup
 const db = getFirestore()
-const providersCollection = collection(db, 'accessibilityProviders') // Firestore collection
+const providersCollection = collection(db, 'accessibilityProviders')
 
-// Default chart data
 const chartData = ref({
   labels: [],
   datasets: [
@@ -39,12 +36,10 @@ const chartData = ref({
   ],
 })
 
-// Fetch Firestore data
 const fetchData = async () => {
   const querySnapshot = await getDocs(providersCollection)
   const providerData = querySnapshot.docs.map((doc) => doc.data())
 
-  // Process data (group by region)
   const regionCounts = {}
   providerData.forEach((provider) => {
     const region = provider.region || 'Unknown'
@@ -54,7 +49,6 @@ const fetchData = async () => {
     regionCounts[region]++
   })
 
-  // Prepare chart data
   const labels = Object.keys(regionCounts)
   const data = Object.values(regionCounts)
 
@@ -71,7 +65,7 @@ const fetchData = async () => {
     ],
   }
 
-  // Initialize chart
+  // Create chart
   new ChartJS(chartRef.value, {
     type: 'bar',
     data: chartData.value,
@@ -126,7 +120,6 @@ const fetchData = async () => {
   })
 }
 
-// Initialize the chart when the component is mounted
 onMounted(() => {
   fetchData()
 })

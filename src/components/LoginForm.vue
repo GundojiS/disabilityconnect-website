@@ -81,7 +81,6 @@
 </template>
 
 <script setup>
-// Our logic will go here
 import { ref } from 'vue'
 
 const formData = ref({
